@@ -1,0 +1,365 @@
+{% extends "base.html" %}
+
+{% block title %}Patient Dashboard{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="stylesheet" href="{{ url_for('static', filename='/patient_dashboard.css') }}">
+
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+<div class="container-fluid p-0">
+    <div class="row g-0">
+        <!-- Doctor List Section (Sidebar) -->
+        <div class="col-12 col-md-4 doctor-sidebar">
+            <div class="sidebar-header p-3 d-flex justify-content-between align-items-center">
+                <div class="welcome-container">
+                    <h3 class="m-0">Welcome, {{ patient_name }}</h3>
+                    <span class="status-badge">Patient Portal</span>
+                </div>
+                <button class="btn btn-sm btn-outline-light d-md-none" id="toggleSidebar" aria-label="Toggle Sidebar">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+            
+            <!-- Search Bar -->
+            <div class="search-container p-3">
+                <div class="input-group">
+                    <span class="input-group-text bg-transparent border-end-0">
+                        <i class="fas fa-search text-muted"></i>
+                    </span>
+                    <input type="text" class="form-control border-start-0" id="doctorSearch" placeholder="Search doctors...">
+                </div>
+            </div>
+
+            <div class="doctor-list" id="doctorListContainer">
+                <div class="list-header">
+                    <span>Your Doctors</span>
+                </div>
+                <ul class="list-group list-group-flush" id="doctorList">
+                    {% for doctor in doctors %}
+                    <li class="doctor-item {% if request.args.get('doctor_id') == doctor.id|string %}active{% endif %}">
+                        <a href="{{ url_for('dashboard.patient_dashboard', doctor_id=doctor.id) }}" class="doctor-link">
+                            <div class="doctor-avatar">
+                                <div class="avatar-placeholder">
+                                    {{ doctor.full_name[:1] }}
+                                </div>
+                                {% if doctor.active %}
+                                <span class="status-indicator online"></span>
+                                {% else %}
+                                <span class="status-indicator offline"></span>
+                                {% endif %}
+                            </div>
+                            <div class="doctor-info">
+                                <div class="doctor-name">Dr. {{ doctor.full_name }}</div>
+                                <div class="doctor-details">
+                                    <div class="detail-item">
+                                        <i class="fas fa-map-marker-alt fa-sm"></i>
+                                        <small>{{ doctor.distance }} km away</small>
+                                    </div>
+                                    {% if doctor.hospital_clinic %}
+                                    <div class="detail-item">
+                                        <i class="fas fa-hospital fa-sm"></i>
+                                        <small class="hospital">{{ doctor.hospital_clinic }}</small>
+                                    </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </a>
+                        <div class="doctor-actions">
+                            <a href="{{ url_for('dashboard.view_doctor_patient', doctor_id=doctor.id) }}" class="btn btn-sm btn-outline-primary">
+                                <i class="fas fa-user-md"></i> View Profile
+                            </a>
+                        </div>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+
+        <!-- Chat Section -->
+        <div class="col-12 col-md-8 chat-section">
+            {% if request.args.get('doctor_id') %}
+                {% set current_doctor = doctors|selectattr('id', 'eq', request.args.get('doctor_id')|int)|first %}
+                <div class="chat-header p-3">
+                    <div class="d-flex align-items-center">
+                        <button class="btn btn-sm btn-light me-2 d-md-none" id="mobileToggleSidebar" aria-label="Show Doctors">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <div class="doctor-avatar small me-3">
+                            <div class="avatar-placeholder">
+                                {{ current_doctor.full_name[:1] }}
+                            </div>
+                            {% if current_doctor.active %}
+                            <span class="status-indicator online"></span>
+                            {% else %}
+                            <span class="status-indicator offline"></span>
+                            {% endif %}
+                        </div>
+                        <div>
+                            <h4 class="mb-0">Dr. {{ current_doctor.full_name }}</h4>
+                            <div class="doctor-status">
+                                {% if current_doctor.active %}
+                                <span class="status-text online"><i class="fas fa-circle fa-xs"></i> Online</span>
+                                {% else %}
+                                <span class="status-text offline"><i class="fas fa-circle fa-xs"></i> Offline</span>
+                                {% endif %}
+                                <span class="hospital-badge">{{ current_doctor.hospital_clinic }}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div class="chat-actions">
+                        <button class="btn btn-sm btn-light action-btn" title="Call">
+                            <i class="fas fa-phone"></i>
+                        </button>
+                        <button class="btn btn-sm btn-light action-btn" title="Video">
+                            <i class="fas fa-video"></i>
+                        </button>
+                        <button class="btn btn-sm btn-light action-btn" title="More">
+                            <i class="fas fa-ellipsis-v"></i>
+                        </button>
+                    </div> -->
+                </div>
+            {% else %}
+                <div class="chat-header p-3">
+                    <div class="d-flex align-items-center">
+                        <button class="btn btn-sm btn-light me-2 d-md-none" id="mobileToggleSidebar" aria-label="Show Doctors">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <div class="welcome-message">
+                            <i class="fas fa-comment-medical welcome-icon"></i>
+                            <h4>Select a doctor to start chatting</h4>
+                            <p class="text-muted">Choose a doctor from the list to begin your conversation</p>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+
+            <!-- Message History -->
+            <div id="messages" class="flex-grow-1 p-3 mb-2">
+                {% if conversation_history %}
+                    <div class="conversation-date">
+                        <span>Today</span>
+                    </div>
+                    {% for message in conversation_history %}
+                        {% if message.sender_id|string == session['user_id']|string %}
+                            <!-- Patient Message -->
+                            <div class="message mb-2 p-2 rounded bg-primary text-white text-end ms-auto">
+                                <div class="message-content">{{ message.content }}</div>
+                                <div class="message-meta">
+                                    <small class="message-time">{{ message.timestamp }}</small>
+                                    <span class="message-status"><i class="fas fa-check-double"></i></span>
+                                </div>
+                            </div>
+                        {% else %}
+                            <!-- Doctor Message -->
+                            <div class="message mb-2 p-2 rounded bg-white text-dark text-start me-auto">
+                                <div class="message-sender">{{ message.sender }}</div>
+                                <div class="message-content">{{ message.content }}</div>
+                                <div class="message-meta">
+                                    <small class="message-time">{{ message.timestamp }}</small>
+                                </div>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                {% else %}
+                    <div class="empty-conversation">
+                        <div class="empty-illustration">
+                            <i class="fas fa-comments"></i>
+                        </div>
+                        <p class="text-muted">No conversation yet. Select a doctor to start chatting.</p>
+                    </div>
+                {% endif %}
+            </div>
+            
+            <!-- Message Input -->
+            <div class="message-composer">
+                <form action="{{ url_for('dashboard.patient_dashboard', doctor_id=request.args.get('doctor_id')) }}" 
+                      method="POST" 
+                      id="messageForm" 
+                      autocomplete="off">
+                
+                    <input type="hidden" name="doctor_id" value="{{ request.args.get('doctor_id') }}">
+                    
+                    <div class="input-group">
+                        <!-- <button type="button" class="btn composer-btn" title="Attach file" aria-label="Attach file">
+                            <i class="fas fa-paperclip"></i>
+                        </button>
+                        
+                        <button type="button" class="btn composer-btn d-none d-md-block" title="Record voice" aria-label="Record voice">
+                            <i class="fas fa-microphone"></i>
+                        </button> -->
+                
+                        <textarea name="message" 
+                                  class="form-control" 
+                                  placeholder="Type a message..." 
+                                  required 
+                                  rows="1" 
+                                  id="messageInput"
+                                  aria-label="Message text"></textarea>
+                
+                        <button type="submit" title="Send message" aria-label="Send message">
+                            <i class="fas fa-paper-plane"></i> Send
+                        </button>
+                                
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Message container scroll to bottom
+    const messagesContainer = document.getElementById('messages');
+    if (messagesContainer) {
+        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    }
+
+    // Doctor search functionality
+    const doctorSearch = document.getElementById('doctorSearch');
+    if (doctorSearch) {
+        doctorSearch.addEventListener('input', function() {
+            const filter = this.value.toLowerCase();
+            const items = document.querySelectorAll('#doctorList .doctor-item');
+
+            items.forEach(item => {
+                const text = item.innerText.toLowerCase();
+                item.style.display = text.includes(filter) ? 'flex' : 'none';
+            });
+        });
+    }
+
+    // Toggle sidebar on mobile
+    const toggleSidebar = document.getElementById('toggleSidebar');
+    const mobileToggleSidebar = document.getElementById('mobileToggleSidebar');
+    const sidebar = document.querySelector('.doctor-sidebar');
+    const sidebarOverlay = document.getElementById('sidebarOverlay');
+    
+    const toggleSidebarVisibility = () => {
+        sidebar.classList.toggle('show');
+        sidebarOverlay.classList.toggle('show');
+        document.body.classList.toggle('sidebar-open');
+    };
+    
+    if (toggleSidebar) {
+        toggleSidebar.addEventListener('click', toggleSidebarVisibility);
+    }
+    
+    if (mobileToggleSidebar) {
+        mobileToggleSidebar.addEventListener('click', toggleSidebarVisibility);
+    }
+    
+    if (sidebarOverlay) {
+        sidebarOverlay.addEventListener('click', toggleSidebarVisibility);
+    }
+    
+    // Close sidebar when clicking outside or on links (mobile)
+    document.addEventListener('click', function(event) {
+        if (window.innerWidth < 768 && 
+            sidebar.classList.contains('show') &&
+            !sidebar.contains(event.target) && 
+            !toggleSidebar.contains(event.target) &&
+            !mobileToggleSidebar.contains(event.target)) {
+            
+            sidebar.classList.remove('show');
+            sidebarOverlay.classList.remove('show');
+            document.body.classList.remove('sidebar-open');
+        }
+    });
+    
+    // Add click listener to doctor links to close sidebar on mobile
+    const doctorLinks = document.querySelectorAll('.doctor-link, .doctor-actions a');
+    doctorLinks.forEach(link => {
+        link.addEventListener('click', function() {
+            if (window.innerWidth < 768 && sidebar.classList.contains('show')) {
+                sidebar.classList.remove('show');
+                sidebarOverlay.classList.remove('show');
+                document.body.classList.remove('sidebar-open');
+            }
+        });
+    });
+
+    // Auto-resize message input
+    const messageInput = document.getElementById('messageInput');
+    if (messageInput) {
+        messageInput.addEventListener('input', function() {
+            this.style.height = 'auto';
+            const newHeight = Math.min(this.scrollHeight, 100);
+            this.style.height = newHeight + 'px';
+        });
+        
+        // Fix iOS focusing issues
+        messageInput.addEventListener('focus', function() {
+            setTimeout(() => {
+                messagesContainer.scrollTop = messagesContainer.scrollHeight;
+            }, 300);
+        });
+    }
+    
+    // Window resize handling
+    window.addEventListener('resize', function() {
+        if (window.innerWidth >= 768 && sidebar.classList.contains('show')) {
+            sidebar.classList.remove('show');
+            sidebarOverlay.classList.remove('show');
+            document.body.classList.remove('sidebar-open');
+        }
+    });
+    
+    // Fix for iOS height issues
+    const setInitialHeight = () => {
+        const vh = window.innerHeight * 0.01;
+        document.documentElement.style.setProperty('--vh', `${vh}px`);
+    };
+    
+    setInitialHeight();
+    window.addEventListener('resize', setInitialHeight);
+
+    // Optional: Detect enter key to send message
+    if (messageInput) {
+        messageInput.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                const sendButton = document.getElementById('sendButton');
+                if (sendButton) {
+                    sendButton.click();
+                }
+            }
+        });
+    }
+
+    // Optional: Highlight active chat user
+    const doctorItems = document.querySelectorAll('.doctor-item');
+    doctorItems.forEach(item => {
+        item.addEventListener('click', function() {
+            doctorItems.forEach(i => i.classList.remove('active'));
+            this.classList.add('active');
+        });
+    });
+
+    // Optional: Preview file/image before sending
+    const fileInput = document.getElementById('fileInput');
+    const filePreview = document.getElementById('filePreview');
+
+    if (fileInput && filePreview) {
+        fileInput.addEventListener('change', function() {
+            const file = this.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    if (file.type.startsWith('image/')) {
+                        filePreview.innerHTML = `<img src="${e.target.result}" alt="Preview" class="rounded w-24 h-24 object-cover border border-gray-300"/>`;
+                    } else {
+                        filePreview.innerHTML = `<p class="text-sm text-gray-600">${file.name}</p>`;
+                    }
+                };
+                reader.readAsDataURL(file);
+            } else {
+                filePreview.innerHTML = '';
+            }
+        });
+    }
+});
+</script>
+{% endblock %}

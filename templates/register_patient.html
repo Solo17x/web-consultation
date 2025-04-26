@@ -1,0 +1,185 @@
+{% extends "base.html" %}
+{% block title %}Patient Registration{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="text-center">Patient Registration</h2>
+    
+    <form method="POST" action="{{ url_for('auth.register_patient') }}" enctype="multipart/form-data">
+        {{ form.hidden_tag() }}
+
+        <fieldset>
+            <legend>Personal Information</legend>
+            <div class="row">
+                <div class="col-md-6">
+                    {{ form.full_name.label(class="form-label") }}
+                    {{ form.full_name(class="form-control") }}
+                </div>
+                <div class="col-md-6">
+                    {{ form.email.label(class="form-label") }}
+                    {{ form.email(class="form-control") }}
+                </div>
+            </div>
+
+            <div class="row mt-3">
+                <div class="col-md-6">
+                    {{ form.profile_picture.label(class="form-label") }}
+                    {{ form.profile_picture(class="form-control", accept="image/*")}}
+                </div>
+                <div class="col-md-6">
+                    {{ form.gender.label(class="form-label") }}
+                    {{ form.gender(class="form-control") }}
+                </div>
+            </div>
+        </fieldset>
+
+        <fieldset>
+            <legend>Contact & Demographics</legend>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    {{ form.phone.label(class="form-label") }}
+                    {{ form.phone(class="form-control", oninput="this.value = this.value.replace(/[^0-9]/g, '')", maxlength="11", pattern="09\d{9}", title="Phone number must be 11 digits and start with 09") }}
+                </div>
+                <div class="col-md-6">
+                    {{ form.dob.label }} 
+                    {{ form.dob(class="form-control", type="text", placeholder="YYYY-MM-DD") }}
+                </div>
+                
+            </div>
+        </fieldset>
+        
+        <fieldset>
+            <legend>Medical & Location Details</legend>
+            <div class="row">
+                <div class="col-md-4">
+                    {{ form.blood_type.label(class="form-label") }}
+                    {{ form.blood_type(class="form-control") }}
+                </div>
+                <div class="col-md-4">
+                    {{ form.country.label(class="form-label") }}
+                    {{ form.country(class="form-control") }}
+                </div>
+                <div class="col-md-4">
+                    {{ form.city.label(class="form-label") }}
+                    {{ form.city(class="form-control") }}
+                </div>
+            </div>
+
+            <div class="row mt-3">
+                <div class="col-md-6">
+                    {{ form.preferred_language.label(class="form-label") }}
+                    {{ form.preferred_language(class="form-control") }}
+                </div>
+            </div>
+
+            <div class="form-group mt-3">
+                {{ form.existing_conditions.label(class="form-label") }}
+                {{ form.existing_conditions(class="form-control") }}
+            </div>
+
+            <div class="form-group mt-3">
+                {{ form.current_medication.label(class="form-label") }}
+                {{ form.current_medication(class="form-control") }}
+            </div>
+
+            <div class="form-group mt-3">
+                {{ form.past_surgeries.label(class="form-label") }}
+                {{ form.past_surgeries(class="form-control") }}
+            </div>
+        </fieldset>
+
+        <fieldset>
+            <legend>Emergency Contact</legend>
+            <div class="form-group">
+                {{ form.emergency_contact_name.label(class="form-label") }}
+                {{ form.emergency_contact_name(class="form-control") }}
+            </div>
+            <div class="col-md-6 mb-3">
+                {{ form.emergency_contact_phone.label(class="form-label") }}
+                {{ form.emergency_contact_phone(class="form-control", oninput="this.value = this.value.replace(/[^0-9]/g, '')", maxlength="11", pattern="09\d{9}", title="Emergency contact phone number must be 11 digits and start with 09") }}
+            </div>
+        </fieldset>
+        
+            <!-- Security -->
+            <fieldset class="border p-3 rounded mb-4">
+                <legend class="w-auto text-primary fw-bold">Security</legend>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="password">{{ form.password.label.text }}</label>
+                        <div class="input-group">
+                            {{ form.password(class="form-control", id="password") }}
+                            <button class="btn btn-outline-secondary" type="button" onclick="togglePassword('password')">
+                                <i class="bi bi-eye-slash" id="togglePasswordIcon1"></i>
+                            </button>
+                        </div>
+                        {% for error in form.password.errors %}
+                        <small class="text-danger">{{ error }}</small>
+                        {% endfor %}
+                    </div>
+                    <div class="col-md-6">
+                        <label for="confirm_password">{{ form.confirm_password.label.text }}</label>
+                        <div class="input-group">
+                            {{ form.confirm_password(class="form-control", id="confirm_password") }}
+                            <button class="btn btn-outline-secondary" type="button" onclick="togglePassword('confirm_password')">
+                                <i class="bi bi-eye-slash" id="togglePasswordIcon2"></i>
+                            </button>
+                        </div>
+                        {% for error in form.confirm_password.errors %}
+                        <small class="text-danger">{{ error }}</small>
+                        {% endfor %}
+                    </div>
+                </div>
+            </fieldset>
+        
+        <button type="submit" class="btn btn-primary mt-3">Register</button>
+    </form>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const passwordInput = document.getElementById("password");
+        const confirmPasswordInput = document.getElementById("confirm_password");
+        const passwordWarning = document.getElementById("password-warning");
+        const confirmPasswordWarning = document.getElementById("confirm-password-warning");
+        const submitButton = document.querySelector("button[type='submit']");
+
+        function validatePassword() {
+            const password = passwordInput.value;
+            const isValid = password.length >= 8 && /[A-Z]/.test(password) && /\d/.test(password) && /[@$!%*?&]/.test(password);
+            passwordWarning.textContent = isValid ? "" : "⚠️ Password must be at least 8 characters, contain an uppercase letter, a number, and a special character.";
+            return isValid;
+        }
+
+        function validateConfirmPassword() {
+            const isMatch = confirmPasswordInput.value === passwordInput.value;
+            confirmPasswordWarning.textContent = isMatch ? "" : "⚠️ Passwords do not match.";
+            return isMatch;
+        }
+
+        function validateForm(event) {
+            if (!validatePassword() || !validateConfirmPassword()) {
+                event.preventDefault();
+                submitButton.disabled = true;
+            } else {
+                submitButton.disabled = false;
+            }
+        }
+
+        passwordInput.addEventListener("input", validateForm);
+        confirmPasswordInput.addEventListener("input", validateForm);
+    });
+    function togglePassword(fieldId) {
+        const input = document.getElementById(fieldId);
+        const icon = document.getElementById(`togglePasswordIcon${fieldId === "password" ? 1 : 2}`);
+        if (input.type === "password") {
+            input.type = "text";
+            icon.classList.remove("bi-eye-slash");
+            icon.classList.add("bi-eye");
+        } else {
+            input.type = "password";
+            icon.classList.remove("bi-eye");
+            icon.classList.add("bi-eye-slash");
+        }
+    }
+</script>
+{% endblock %}

@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="card shadow-lg p-4">
+        <h2>Profile Settings</h2>
+        
+        <form method="POST" enctype="multipart/form-data">
+            <!-- Profile Picture Upload -->
+            <div class="mb-3 text-center">
+                <img src="{{ user.profile_picture_url }}" alt="Profile Picture" class="rounded-circle" width="120" height="120">
+                <input type="file" name="profile_picture" class="form-control mt-2">
+            </div>
+            
+            <!-- Basic Information -->
+            <div class="mb-3">
+                <label class="form-label">Full Name</label>
+                <input type="text" name="full_name" class="form-control" value="{{ user.full_name }}" required>
+            </div>
+            
+            <div class="mb-3">
+                <label class="form-label">Email</label>
+                <input type="email" name="email" class="form-control" value="{{ user.email }}" required>
+            </div>
+            
+            <!-- Conditional Fields for Patients and Doctors -->
+            {% if user.role == 'Patient' %}
+            <div class="mb-3">
+                <label class="form-label">Blood Type</label>
+                <input type="text" name="blood_type" class="form-control" value="{{ user.blood_type }}">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Emergency Contact</label>
+                <input type="text" name="emergency_contact" class="form-control" value="{{ user.emergency_contact }}">
+            </div>
+            {% elif user.role == 'Doctor' %}
+            <div class="mb-3">
+                <label class="form-label">Specialization</label>
+                <input type="text" name="specialization" class="form-control" value="{{ user.specialization }}">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Years of Experience</label>
+                <input type="number" name="experience" class="form-control" value="{{ user.experience }}">
+            </div>
+            {% endif %}
+            
+            <!-- Submit Button -->
+            <button type="submit" class="btn btn-primary">Save Changes</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

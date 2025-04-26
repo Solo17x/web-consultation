@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Meeting Room</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+        }
+        #root {
+            width: 100vw;
+            height: 100vh;
+        }
+    </style>
+</head>
+
+<body>
+    <a href="{{ url_for('dashboard.doctor_dashboard') }}" class="btn btn-outline-primary position-absolute top-0 start-0 m-3 d-flex align-items-center gap-1" style="z-index: 9999; border-radius: 50px;">
+        <i class="bi bi-arrow-left-circle"></i>
+        Back to Dashboard
+    </a>
+    
+    
+    <div id="root"></div>
+
+    <!-- ZegoCloud UIKit -->
+    <script src="https://unpkg.com/@zegocloud/zego-uikit-prebuilt/zego-uikit-prebuilt.js"></script>
+    <script>
+        window.onload = function () {
+            console.log("[ZEGOCLOUD] Window loaded.");
+    
+            function getUrlParams(url) {
+                let urlStr = url.split('?')[1];
+                const urlSearchParams = new URLSearchParams(urlStr);
+                const result = Object.fromEntries(urlSearchParams.entries());
+                console.log("[ZEGOCLOUD] URL Params extracted:", result);
+                return result;
+            }
+    
+            const roomID = getUrlParams(window.location.href)['roomID'] || (Math.floor(Math.random() * 10000) + "");
+            console.log("[ZEGOCLOUD] Room ID:", roomID);
+    
+            const userID = Math.floor(Math.random() * 10000) + "";
+            console.log("[ZEGOCLOUD] User ID:", userID);
+    
+            const userName = "{{ doctor_name}}";
+            console.log("[ZEGOCLOUD] Doctor/User Name from Flask:", userName);
+    
+            const appID = 1455837029;
+            const serverSecret = "44592f741b816877fd9346ec116d0229";
+    
+            console.log("[ZEGOCLOUD] Generating kit token...");
+            const kitToken = ZegoUIKitPrebuilt.generateKitTokenForTest(
+                appID, serverSecret, roomID, userID, userName
+            );
+            console.log("[ZEGOCLOUD] Kit token generated.");
+    
+            const zp = ZegoUIKitPrebuilt.create(kitToken);
+            console.log("[ZEGOCLOUD] ZegoUIKitPrebuilt instance created. Joining room...");
+    
+            zp.joinRoom({
+                container: document.querySelector("#root"),
+                sharedLinks: [{
+                    name: 'Invite Link',
+                    url: `${window.location.protocol}//${window.location.host}${window.location.pathname}?roomID=${roomID}`
+                }],
+                scenario: {
+                    mode: ZegoUIKitPrebuilt.VideoConference,
+                },
+                turnOnMicrophoneWhenJoining: true,
+                turnOnCameraWhenJoining: true,
+                showMyCameraToggleButton: true,
+                showMyMicrophoneToggleButton: true,
+                showAudioVideoSettingsButton: true,
+                showScreenSharingButton: true,
+                showTextChat: true,
+                showUserList: true,
+                maxUsers: 3,
+                layout: "Auto",
+                showLayoutButton: false,
+            });
+    
+            console.log("[ZEGOCLOUD] Room joined successfully.");
+        }
+    </script>
+    
+</body>
+</html>

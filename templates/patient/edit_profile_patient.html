@@ -1,0 +1,162 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="text-center mb-4">Edit Patient Profile</h2>
+
+    <!-- Flash Messages (Auto-hide after 3 seconds) -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <div id="flash-messages">
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                        {{ message }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+
+    <form method="POST" enctype="multipart/form-data">
+        <!-- Personal Information -->
+        <fieldset class="border p-3 mb-4">
+            <legend class="w-auto text-primary fw-bold">Personal Information</legend>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label for="full_name" class="form-label">Full Name</label>
+                    <input type="text" class="form-control" id="full_name" name="full_name" value="{{ patient.full_name }}" required>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="phone" class="form-label">Phone</label>
+                    <input type="text" class="form-control" id="phone" name="phone" value="{{ patient.phone }}" required 
+                        pattern="09\d{9}" maxlength="11" title="Phone number must be 11 digits and start with 09">
+                </div>
+            </div>
+            <div class="row">
+                <div class="mb-3">
+                    <label for="date_of_birth" class="form-label">Date of Birth (YYYY-MM-DD)</label>
+                    <input type="text" class="form-control" id="date_of_birth" name="date_of_birth"
+                           value="{{ patient.dob.strftime('%Y-%m-%d') if patient.dob else '' }}" required placeholder="YYYY-MM-DD">
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="gender" class="form-label">Gender</label>
+                    <select class="form-control" id="gender" name="gender" required>
+                        <option value="Male" {% if patient.gender == 'Male' %}selected{% endif %}>Male</option>
+                        <option value="Female" {% if patient.gender == 'Female' %}selected{% endif %}>Female</option>
+                        <option value="Other" {% if patient.gender == 'Other' %}selected{% endif %}>Other</option>
+                    </select>
+                </div>
+            </div>
+        </fieldset>
+
+        <!-- Profile Picture -->
+        <fieldset class="border p-3 mb-4">
+            <legend class="w-auto text-primary fw-bold">Profile Picture</legend>
+            <div class="mb-3">
+                <label for="profile_picture" class="form-label">Upload New Profile Picture</label>
+                <input type="file" class="form-control" id="profile_picture" name="profile_picture" accept="image/*">
+            </div>
+        </fieldset>
+
+        <!-- Location Information -->
+        <fieldset class="border p-3 mb-4">
+            <legend class="w-auto text-primary fw-bold">Location Information</legend>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label for="country" class="form-label">Province</label>
+                    <input type="text" class="form-control" id="country" name="country" value="{{ patient.country or '' }}" readonly required>
+                </div>
+                
+                <div class="col-md-6 mb-3">
+                    <label for="city" class="form-label">Municipality</label>
+                    <select class="form-control" id="city" name="city" required>
+                        <option value="" disabled>Select City</option>
+                        {% for city in cities %}
+                            <option value="{{ city[0] }}" 
+                                {% if city[1] == patient.city %}selected{% endif %}>
+                                {{ city[1] }} 
+                                <!-- {{ city[1] }} (Lat: {{ city[2] }}, Long: {{ city[3] }}) -->
+                            </option>
+                        {% endfor %}
+                    </select>
+                    <input type="hidden" name="latitude" id="latitude" value="{{ patient.latitude }}">
+                    <input type="hidden" name="longitude" id="longitude" value="{{ patient.longitude }}">
+                </div>
+            </div>
+        </fieldset>
+
+        <!-- Medical Information -->
+        <fieldset class="border p-3 mb-4">
+            <legend class="w-auto text-primary fw-bold">Medical Information</legend>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label for="blood_type" class="form-label">Blood Type</label>
+                    <select class="form-control" id="blood_type" name="blood_type">
+                        <option value="A+" {% if patient.blood_type == 'A+' %}selected{% endif %}>A+</option>
+                        <option value="B+" {% if patient.blood_type == 'B+' %}selected{% endif %}>B+</option>
+                        <option value="AB+" {% if patient.blood_type == 'AB' %}selected{% endif %}>AB+</option>
+                        <option value="O+" {% if patient.blood_type == 'O+' %}selected{% endif %}>O+</option>
+                        <option value="A-" {% if patient.blood_type == 'A-' %}selected{% endif %}>A-</option>
+                        <option value="B-" {% if patient.blood_type == 'B-' %}selected{% endif %}>B-</option>
+                        <option value="AB-" {% if patient.blood_type == 'AB-' %}selected{% endif %}>AB-</option>
+                        <option value="O-" {% if patient.blood_type == 'O-' %}selected{% endif %}>O-</option>
+                    </select>
+                </div>
+                
+                <div class="col-md-6 mb-3">
+                    <label for="current_medication" class="form-label">Current Medication</label>
+                    <textarea class="form-control" id="current_medication" name="current_medication">{{ patient.current_medication }}</textarea>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="past_surgeries" class="form-label">Past Surgeries/Procedures</label>
+                <textarea class="form-control" id="past_surgeries" name="past_surgeries">{{ patient.past_surgeries }}</textarea>
+            </div>
+        </fieldset>
+
+        <!-- Emergency Contact -->
+        <fieldset class="border p-3 mb-4">
+            <legend class="w-auto text-primary fw-bold">Emergency Contact</legend>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label for="emergency_contact_name" class="form-label">Emergency Contact Name</label>
+                    <input type="text" class="form-control" id="emergency_contact_name" name="emergency_contact_name" value="{{ patient.emergency_contact_name }}" required>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="emergency_contact_phone" class="form-label">Emergency Contact Phone</label>
+                    <input type="text" class="form-control" id="emergency_contact_phone" name="emergency_contact_phone" value="{{ patient.emergency_contact_phone }}" required 
+                        pattern="09\d{9}" maxlength="11" title="Phone number must be 11 digits and start with 09">
+                </div>
+            </div>
+        </fieldset>
+
+        <!-- Language Preference -->
+        <fieldset class="border p-3 mb-4">
+            <legend class="w-auto text-primary fw-bold">Preferences</legend>
+            <div class="mb-3">
+                <label for="preferred_language" class="form-label">Preferred Language</label>
+                <select class="form-control" id="preferred_language" name="preferred_language">
+                    <option value="Tagalog" {% if patient.preferred_language == 'Tagalog' %}selected{% endif %}>Tagalog</option>
+                    <option value="English" {% if patient.preferred_language == 'English' %}selected{% endif %}>English</option>
+                    <option value="Ilocano" {% if patient.preferred_language == 'Ilocano' %}selected{% endif %}>Ilocano</option>
+                </select>
+            </div>
+        </fieldset>
+
+        <button type="submit" class="btn btn-primary w-100">Update Profile</button>
+    </form>
+</div>
+
+<!-- Auto-hide flash messages after 3 seconds -->
+<script>
+    setTimeout(function() {
+        let alerts = document.querySelectorAll('.alert');
+        alerts.forEach(alert => {
+            let bsAlert = new bootstrap.Alert(alert);
+            bsAlert.close();
+        });
+    }, 3000);
+</script>
+
+{% endblock %}

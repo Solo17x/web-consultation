@@ -1,0 +1,292 @@
+{% extends "base.html" %}
+
+{% block title %}Doctor Dashboard{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="stylesheet" href="{{ url_for('static', filename='/doctor_dashboard.css') }}">
+
+<div class="container-fluid p-0">
+    <!-- Mobile Header (visible only on small screens) -->
+    <div class="col-12 d-md-none mobile-header">
+        <div class="d-flex justify-content-between align-items-center h-100">
+            <h3 class="mb-0">MediConnect</h3>
+            <button class="btn btn-outline-light rounded-circle" id="mobileToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </div>
+    
+    <div class="row g-0">
+        <!-- Patient List Section (Sidebar) -->
+        <div class="col-12 col-md-4 col-lg-3 doctor-sidebar">
+            <div class="sidebar-header p-3 d-flex justify-content-between align-items-center">
+                <div class="welcome-text">
+                    <h3 class="m-0">Welcome,</h3>
+                    <p class="doctor-name m-0">Dr. {{ doctor_name }}</p>
+                </div>
+                <button class="btn btn-sm btn-outline-light d-md-none" id="toggleSidebar">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+
+            <!-- Search Bar -->
+            <div class="search-container p-3">
+                <div class="input-group search-group">
+                    <span class="input-group-text bg-transparent border-end-0">
+                        <i class="fas fa-search"></i>
+                    </span>
+                    <input type="text" class="form-control border-start-0" id="patientSearch" placeholder="Search patients...">
+                </div>
+            </div>
+
+            <div class="patient-list" id="patientListContainer">
+                <div class="patient-list-header px-3 py-2">
+                    <h6 class="m-0">Your Patients</h6>
+                </div>
+                <ul class="list-group list-group-flush" id="patientList">
+                    {% for patient in patients %}
+                    <li class="patient-item {% if request.args.get('patient_id') == patient.id|string %}active{% endif %}">
+                        <a href="{{ url_for('dashboard.doctor_dashboard', patient_id=patient.id) }}" class="patient-link">
+                            <div class="patient-avatar">
+                                <div class="avatar-placeholder">
+                                    {{ patient.full_name[:1] }}
+                                </div>
+                                {% if patient.active %}
+                                <span class="status-indicator online"></span>
+                                {% else %}
+                                <span class="status-indicator offline"></span>
+                                {% endif %}
+                            </div>
+                            <div class="patient-info">
+                                <div class="patient-name">{{ patient.full_name }}</div>
+                                <div class="patient-condition">{{ patient.medical_condition }}</div>
+                            </div>
+                        
+                            <div class="patient-actions">
+                                <a href="{{ url_for('dashboard.view_patient_doctor', patient_id=patient.id) }}" class="btn btn-sm action-btn">
+                                    <i class="fas fa-user"></i>
+                                </a>
+                            </div>
+                        </a>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+
+        <!-- Chat Section -->
+        <div class="col-12 col-md-8 col-lg-9 chat-section">
+            {% if request.args.get('patient_id') %}
+                {% set current_patient = patients|selectattr('id', 'eq', request.args.get('patient_id')|int)|first %}
+                <div class="chat-header">
+                    <div class="d-flex align-items-center">
+                        <div class="patient-avatar small me-3">
+                            <div class="avatar-placeholder">
+                                {{ current_patient.full_name[:1] }}
+                            </div>
+                            {% if current_patient.active %}
+                            <span class="status-indicator online"></span>
+                            {% else %}
+                            <span class="status-indicator offline"></span>
+                            {% endif %}
+                        </div>
+                        <div>
+                            <h4 class="mb-0">{{ current_patient.full_name }}</h4>
+                            <div class="d-flex align-items-center mt-1">
+                                {% if current_patient.active %}
+                                <span class="status-badge online">Online</span>
+                                {% else %}
+                                <span class="status-badge offline">Offline</span>
+                                {% endif %}
+                                <span class="condition-badge">{{ current_patient.medical_condition }}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div class="chat-actions">
+                        <button class="btn action-btn" title="Video Call">
+                            <i class="fas fa-video"></i>
+                        </button>
+                        <button class="btn action-btn" title="View Medical Records">
+                            <i class="fas fa-file-medical"></i>
+                        </button>
+                        <button class="btn action-btn" title="More Options">
+                            <i class="fas fa-ellipsis-v"></i>
+                        </button>
+                    </div> -->
+                </div>
+            {% else %}
+                <div class="chat-header empty-header d-flex align-items-center justify-content-center">
+                    <div class="empty-chat-state">
+                        <i class="fas fa-comments fa-3x mb-4"></i>
+                        <h4>Select a patient to start chatting</h4>
+                    </div>
+                </div>
+            {% endif %}
+
+            <!-- Message History -->
+            <div id="messages" class="chat-messages">
+                {% if conversation_history %}
+                    <div class="message-date-divider">
+                        <span>Today</span>
+                    </div>
+                    {% for message in conversation_history %}
+                        {% if message.sender_id|string == session['user_id']|string %}
+                            <!-- Doctor Message -->
+                            <div class="message doctor-message">
+                                <div class="message-content">
+                                    <div class="message-header">
+                                        <strong>You</strong>
+                                    </div>
+                                    <p class="mb-1">{{ message.content }}</p>
+                                    <small class="message-time">{{ message.timestamp }}</small>
+                                </div>
+                            </div>
+                        {% else %}
+                            <!-- Patient Message -->
+                            <div class="message patient-message">
+                                <div class="message-content">
+                                    <div class="message-header">
+                                        <strong>{{ message.sender }}</strong>
+                                    </div>
+                                    <p class="mb-1">{{ message.content }}</p>
+                                    <small class="message-time">{{ message.timestamp }}</small>
+                                </div>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                {% else %}
+                    {% if request.args.get('patient_id') %}
+                        <div class="conversation-start">
+                            <div class="conversation-start-content">
+                                <i class="fas fa-comment-medical"></i>
+                                <h5>Start a conversation</h5>
+                                <p>Send a message to begin chatting with this patient</p>
+                            </div>
+                        </div>
+                    {% else %}
+                        <div class="no-messages">
+                            <div class="no-messages-content">
+                                <i class="fas fa-comment-medical"></i>
+                                <p>No conversation yet. Select a patient to start chatting.</p>
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endif %}
+            </div>
+
+            <!-- Message Input -->
+            <div class="message-composer">
+                <form action="{{ url_for('dashboard.doctor_dashboard', patient_id=request.args.get('patient_id')) }}" 
+                      method="POST" 
+                      id="messageForm" 
+                      autocomplete="off"
+                      {% if not request.args.get("patient_id") %}style="display: none;"{% endif %}>
+                    <input type="hidden" name="patient_id" value="{{ request.args.get('patient_id') }}">
+                    
+                    <div class="input-group composer-group">
+                        <!-- <button type="button" class="btn composer-btn attachment-btn" title="Attach File">
+                            <i class="fas fa-paperclip"></i>
+                        </button> -->
+                
+                        <textarea name="message" 
+                                  class="form-control message-input" 
+                                  placeholder="Type a message..." 
+                                  required 
+                                  rows="1" 
+                                  id="messageInput"></textarea>
+                
+                        <button type="button" class="btn composer-btn emoji-btn" title="Add Emoji">
+                            <i class="far fa-smile"></i>
+                        </button>
+                
+                        <button type="submit" 
+                                class="btn composer-btn send-btn" 
+                                title="Send Message">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Message container scroll to bottom
+    const messagesContainer = document.getElementById('messages');
+    if (messagesContainer) {
+        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    }
+
+    // Patient search functionality
+    const patientSearch = document.getElementById('patientSearch');
+    if (patientSearch) {
+        patientSearch.addEventListener('input', function() {
+            const filter = this.value.toLowerCase();
+            const items = document.querySelectorAll('#patientList .patient-item');
+
+            items.forEach(item => {
+                const text = item.innerText.toLowerCase();
+                item.style.display = text.includes(filter) ? 'flex' : 'none';
+            });
+        });
+    }
+
+    // Toggle sidebar on mobile
+    const toggleSidebar = document.getElementById('toggleSidebar');
+    const mobileToggle = document.getElementById('mobileToggle');
+    const sidebar = document.querySelector('.doctor-sidebar');
+    
+    if (toggleSidebar && sidebar) {
+        toggleSidebar.addEventListener('click', function() {
+            sidebar.classList.toggle('show');
+        });
+    }
+    
+    if (mobileToggle && sidebar) {
+        mobileToggle.addEventListener('click', function() {
+            sidebar.classList.toggle('show');
+        });
+        
+        // Close sidebar when clicking outside on mobile
+        document.addEventListener('click', function(event) {
+            if (window.innerWidth < 768 && 
+                !sidebar.contains(event.target) && 
+                !toggleSidebar.contains(event.target) &&
+                !mobileToggle.contains(event.target) &&
+                sidebar.classList.contains('show')) {
+                sidebar.classList.remove('show');
+            }
+        });
+    }
+
+    // Auto-resize message input
+    const messageInput = document.getElementById('messageInput');
+    if (messageInput) {
+        messageInput.addEventListener('input', function() {
+            this.style.height = 'auto';
+            const newHeight = Math.min(this.scrollHeight, 100);
+            this.style.height = newHeight + 'px';
+        });
+    }
+    
+    // Handle window resize events
+    window.addEventListener('resize', function() {
+        if (window.innerWidth >= 768 && sidebar) {
+            sidebar.classList.remove('show');
+        }
+    });
+
+    // Add animation when messages are loaded
+    const messages = document.querySelectorAll('.message');
+    messages.forEach((message, index) => {
+        setTimeout(() => {
+            message.classList.add('show');
+        }, 100 * index);
+    });
+});
+</script>
+
+{% endblock %}

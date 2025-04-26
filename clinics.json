@@ -1,0 +1,1078 @@
+[
+    {
+      "id": "1",
+      "name": "Laoag City General Hospital",
+      "type": "Hospital",
+      "address": "5HQG+6VR, Laoag City, Ilocos Norte",
+      "municipality": "Laoag City",
+      "province": "Ilocos Norte",
+      "latitude": 18.18812429193795,
+      "longitude": 120.57715047409138,
+      "images": [
+        "lcgh_1",
+        "lcgh_2",
+        "lcgh_3"
+      ],
+      "rate": "3.3",
+      "contact": "(077) 772 8828"
+    },
+    {
+      "id": "2",
+      "name": "KARMELLI CLINIC & HOSPITAL CORPORATION",
+      "type": "Hospital",
+      "address": "5JR6+P37, Legaspi, Laoag City, 2900 Ilocos Norte",
+      "municipality": "Laoag City",
+      "province": "Ilocos Norte",
+      "latitude": 18.191705040852227,
+      "longitude": 120.61023504355764,
+      "images": [
+        "kchc_1",
+        "kchc_2",
+        "kchc_3",
+        "kchc_4",
+        "kchc_5",
+        "kchc_6"
+      ],
+      "rate": "3.8",
+      "contact": ""
+    },
+    {
+      "id": "3",
+      "name": "RANADA HOSPITAL",
+      "type": "Hospital",
+      "address": "5HWR+JRX, Laoag City, Ilocos Norte",
+      "municipality": "Laoag City",
+      "province": "Ilocos Norte",
+      "latitude": 18.19662,
+      "longitude": 120.59213,
+      "images": [
+        "ranada_hospital_1",
+        "ranada_hospital_2",
+        "ranada_hospital_3",
+        "ranada_hospital_4"
+      ],
+      "rate": "4.3",
+      "contact": ""
+    },
+    {
+      "id": "4",
+      "name": "GOV. ROQUE B. ABLAN SR. MEMORIAL HOSPITAL",
+      "type": "Hospital",
+      "address": "5JX2+PHP, Laoag City, Ilocos Norte",
+      "municipality": "Laoag City",
+      "province": "Ilocos Norte",
+      "latitude": 18.19936,
+      "longitude": 120.60146,
+      "images": [
+        "gov_roque_b_ablan_sr_memorial_hospital_1",
+        "gov_roque_b_ablan_sr_memorial_hospital_2"
+      ],
+      "rate": "3.8",
+      "contact": "(077) 772 0303"
+    },
+    {
+      "id": "5",
+      "name": "Laoag Pediatric Hospital",
+      "type": "Hospital",
+      "address": "57-A Andres Castro Street, Laoag City, Ilocos Norte",
+      "municipality": "Laoag City",
+      "province": "Ilocos Norte",
+      "latitude": 18.19841,
+      "longitude": 120.59748,
+      "images": [
+        "laoag_pediatric_hospital_1"
+      ],
+      "rate": "5",
+      "contact": "(077) 771 3920"
+    },
+    {
+      "id": "6",
+      "name": "Our Lady Of Fatima Medical Clinic And Hospital",
+      "type": "Hospital",
+      "address": "6H2R+VW9, A. Mabini, Laoag City, 2900 Ilocos Norte",
+      "municipality": "Laoag City",
+      "province": "Ilocos Norte",
+      "latitude": 18.20216,
+      "longitude": 120.5924,
+      "images": [
+        "our_lady_of_fatima_medical_clinic_and_hospital_1"
+      ],
+      "rate": "5",
+      "contact": ""
+    },
+    {
+      "id": "7",
+      "name": "DR. ANTONIO A. RANADA CLINIC AND HOSPITAL",
+      "type": "Hospital",
+      "address": "J. P. Rizal St, Laoag City, Ilocos Norte",
+      "municipality": "Laoag City",
+      "province": "Ilocos Norte",
+      "latitude": 18.19694,
+      "longitude": 120.59104,
+      "images": [
+        "dr_antonio_a_ranada_clinic_and_hospital_1"
+      ],
+      "rate": "5",
+      "contact": "(077) 770 5172"
+    },
+    {
+      "id": "8",
+      "name": "Saint Camilus de Lelis Health Specialists'",
+      "type": "Medical Center",
+      "address": "211 Gomburza, Laoag City, Ilocos Norte",
+      "municipality": "Laoag City",
+      "province": "Ilocos Norte",
+      "latitude": 18.2011,
+      "longitude": 120.59146,
+      "images": [
+        "saint_camilus_de_lelis_health_specialists_1,saint_camilus_de_lelis_health_specialists_2,saint_camilus_de_lelis_health_specialists_3,saint_camilus_de_lelis_health_specialists_4,saint_camilus_de_lelis_health_specialists_5,saint_camilus_de_lelis_health_specialists_6"
+      ],
+      "rate": "4",
+      "contact": ""
+    },
+    {
+      "id": "9",
+      "name": "Duquez Children's Hospital",
+      "type": "Children Hospital",
+      "address": "57-A Andres Castro, Laoag City, 2900 Ilocos Norte",
+      "municipality": "Laoag City",
+      "province": "Ilocos Norte",
+      "latitude": 18.20031,
+      "longitude": 120.59851,
+      "images": [
+        "duquez_childrens_hospital_1,duquez_childrens_hospital_2"
+      ],
+      "rate": "5",
+      "contact": "(077) 600 0153"
+    },
+    {
+      "id": "10",
+      "name": "Santos Clinic & Hospital",
+      "type": "Hospital",
+      "address": "5HXV+QF3, V. Llanes, Laoag City, 2900 Ilocos Norte",
+      "municipality": "Laoag City",
+      "province": "Ilocos Norte",
+      "latitude": 18.1994,
+      "longitude": 120.59373,
+      "images": [
+        "santos_clinic_hospital_1"
+      ],
+      "rate": "5",
+      "contact": ""
+    },
+    {
+      "id": "11",
+      "name": "Medina Medical Psychiatric Care Plus",
+      "type": "Psychiatric hospital",
+      "address": "#52 Gov. Roque B. Ablan, Avenue, Laoag City, 2900 Ilocos Norte",
+      "municipality": "Laoag City",
+      "province": "Ilocos Norte",
+      "latitude": 18.20083,
+      "longitude": 120.59008,
+      "images": [
+        "medina_medical_psychiatric_care_plus_1,medina_medical_psychiatric_care_plus_2"
+      ],
+      "rate": "4.3",
+      "contact": "(077) 600 0087"
+    },
+    {
+      "id": "12",
+      "name": "Saint Camillus De Lellis General Hospital - Laboratory Department",
+      "type": "Laboratory",
+      "address": "211 Gomburza, Laoag City, Ilocos Norte",
+      "municipality": "Laoag City",
+      "province": "Ilocos Norte",
+      "latitude": 18.20133,
+      "longitude": 120.59144,
+      "images": [
+        "saint_camillus_de_lellis_general_hospital_laboratory_department_1"
+      ],
+      "rate": "3",
+      "contact": "09613668271"
+    },
+    {
+      "id": "13",
+      "name": "Health Center",
+      "type": "Medical Center",
+      "address": "5GQW+H7M, Barangay 44, Zamboanga, Laoag City, 2900 Ilocos Norte",
+      "municipality": "Laoag City",
+      "province": "Ilocos Norte",
+      "latitude": 18.18925,
+      "longitude": 120.54576,
+      "images": [
+        "health_center_1"
+      ],
+      "rate": "5",
+      "contact": ""
+    },
+    {
+      "id": "14",
+      "name": "LAOAG EYE INFIRMARY",
+      "type": "Medical Center",
+      "address": "146 J. P. Rizal St, Laoag City, 2900 Ilocos Norte",
+      "municipality": "Laoag City",
+      "province": "Ilocos Norte",
+      "latitude": 18.19417,
+      "longitude": 120.59965,
+      "images": [
+        "laoag_eye_infirmary_1"
+      ],
+      "rate": "5",
+      "contact": "(077) 772 0187"
+    },
+    {
+      "id": "15",
+      "name": "MSR Healthcare Clinic",
+      "type": "Medical Clinic",
+      "address": "Brgy 10 Mckinley St, Laoag City, 2900 Ilocos Norte",
+      "municipality": "Laoag City",
+      "province": "Ilocos Norte",
+      "latitude": 18.19868,
+      "longitude": 120.59505,
+      "images": [
+        "msr_healthcare_clinic_1,msr_healthcare_clinic_2,msr_healthcare_clinic_3,msr_healthcare_clinic_4,msr_healthcare_clinic_5,msr_healthcare_clinic_6,msr_healthcare_clinic_7,msr_healthcare_clinic_8msr_healthcare_clinic_9"
+      ],
+      "rate": "5",
+      "contact": "0998 304 6216"
+    },
+    {
+      "id": "16",
+      "name": "Family Wellness Clinic",
+      "type": "Walk-in Clinic",
+      "address": "6H2V+PV3, Balintawak, Brgy. #9 Sta. Angela, Laoag City, 2900 Ilocos Norte",
+      "municipality": "Laoag City",
+      "province": "Ilocos Norte",
+      "latitude": 18.20223,
+      "longitude": 120.59474,
+      "images": [
+        "family_wellness_clinic_1,family_wellness_clinic_2"
+      ],
+      "rate": "5",
+      "contact": "(077) 607 0829"
+    },
+    {
+      "id": "17",
+      "name": "GUERRERO-LLAGUNO MEDICAL & DIAGNOSTIC CLINIC",
+      "type": "Diagnostic Center",
+      "address": "5HWR+X52, Gen. Giron, Laoag City, Ilocos Norte",
+      "municipality": "Laoag City",
+      "province": "Ilocos Norte",
+      "latitude": 18.19852,
+      "longitude": 120.59044,
+      "images": [
+        "guerrero_ilaguno_medical_diagnostic_clinic_1"
+      ],
+      "rate": "0",
+      "Contact": ""
+    },
+    {
+      "id": "18",
+      "name": "Family Health Women\u00e2\u20ac\u2122s and Children\u00e2\u20ac\u2122s Specialty Clinic",
+      "type": "Medical Clinic",
+      "address": "5 Hernando, Laoag City, Ilocos Norte",
+      "municipality": "Laoag City",
+      "province": "Ilocos Norte",
+      "latitude": 18.19732,
+      "longitude": 120.59086,
+      "images": [
+        "family_health_womens_and_childrens_specialty_clinic_1,family_health_womens_and_childrens_specialty_clinic_2,family_health_womens_and_childrens_specialty_clinic_3"
+      ],
+      "rate": "5",
+      "contact": "0920 932 6459"
+    },
+    {
+      "id": "19",
+      "name": "ILOCOS BIO-RAD MEDICAL AND DIAGNOSTIC CENTER",
+      "type": "Medical Center",
+      "address": "5HWW+59V, General Antonio Luna, Laoag City, Ilocos Norte",
+      "municipality": "Laoag City",
+      "province": "Ilocos Norte",
+      "latitude": 18.19599,
+      "longitude": 120.59596,
+      "images": [
+        "ilocos_bio_rad_medical_and_diagnostic_center_1,ilocos_bio_rad_medical_and_diagnostic_center_2"
+      ],
+      "rate": "0",
+      "contact": ""
+    },
+    {
+      "id": "20",
+      "name": "Jam Medical Clinic",
+      "type": "Medical Clinic",
+      "address": "5JX3+6JR, P. Gomez, Laoag City, 2900 Ilocos Norte",
+      "municipality": "Laoag City",
+      "province": "Ilocos Norte",
+      "latitude": 18.19813,
+      "longitude": 120.60403,
+      "images": [
+        "jam_medical_clinic_1"
+      ],
+      "rate": "0",
+      "contact": ""
+    },
+    {
+      "id": "21",
+      "name": "Fitness Physical Therapy Clinic-Laoag Branch",
+      "type": "Physical therapy Clinic",
+      "address": "Rd, Maritoni Bldg., General Segundo Avenue Bacarra, Laoag City, 2900 Ilocos Norte",
+      "municipality": "Laoag City",
+      "province": "Ilocos Norte",
+      "latitude": 18.19801,
+      "longitude": 120.59524,
+      "images": [
+        "fitness_physical_therapy_clinic_laoag_branch_1,fitness_physical_therapy_clinic_laoag_branch_2,fitness_physical_therapy_clinic_laoag_branch_3,fitness_physical_therapy_clinic_laoag_branch_4,fitness_physical_therapy_clinic_laoag_branch_5"
+      ],
+      "rate": "5",
+      "contact": "0917 632 0924"
+    },
+    {
+      "id": "22",
+      "name": "Laoag City Multimedical Diagnostic Center",
+      "type": "Diagnostic Center",
+      "address": "6H2R+8QG, Mabini corner Siazon Streets, Barangay 13, Ilocos Norte, Laoag City, Ilocos Norte",
+      "municipality": "Laoag City",
+      "province": "Ilocos Norte",
+      "latitude": 18.20087,
+      "longitude": 120.59186,
+      "images": [
+        "laoag_city_multimedical_diagnostic_center_1,laoag_city_multimedical_diagnostic_center_2,laoag_city_multimedical_diagnostic_center_3,laoag_city_multimedical_diagnostic_center_4"
+      ],
+      "rate": "0",
+      "contact": "(077) 770 3627"
+    },
+    {
+      "id": "23",
+      "name": "MDGLOW AESTHETIC AND WELLNESS CLINIC",
+      "type": "Skin Care Clinic",
+      "address": "23 Don Mauricio Castro, Laoag City, Ilocos Norte",
+      "municipality": "Laoag City",
+      "province": "Ilocos Norte",
+      "latitude": 18.19923,
+      "longitude": 120.59105,
+      "images": [
+        "mdglow_aesthetic_and_wellness_clinic_1,mdglow_aesthetic_and_wellness_clinic_2,mdglow_aesthetic_and_wellness_clinic_3,mdglow_aesthetic_and_wellness_clinic_4"
+      ],
+      "rate": "4.5",
+      "contact": "0917 857 1001"
+    },
+    {
+      "id": "24",
+      "name": "Laoag Polyclinic Clinical Laboratory",
+      "type": "Medical Center",
+      "address": "7-A Gen. Giron Street Laoag City Ilocos Norte, Laoag City, 2900 Ilocos Norte",
+      "municipality": "Laoag City",
+      "province": "Ilocos Norte",
+      "latitude": 18.19662,
+      "longitude": 120.59017,
+      "images": [
+        "laoag_polyclinic_clinical_laboratory_1,laoag_polyclinic_clinical_laboratory_2,laoag_polyclinic_clinical_laboratory_3,laoag_polyclinic_clinical_laboratory_4"
+      ],
+      "rate": "3.6",
+      "contact": "(077) 670 7647"
+    },
+    {
+      "id": "25",
+      "name": "Saviour'S Medical Centre",
+      "type": "Medical Center",
+      "address": "6H2Q+G7M, Samonte St., Brgy. 2 P. D., Laoag City, 2900 Ilocos Norte",
+      "municipality": "Laoag City",
+      "province": "Ilocos Norte",
+      "latitude": 18.20134,
+      "longitude": 120.58815,
+      "images": [
+        "saviours_medical_centre_1,saviours_medical_centre_2"
+      ],
+      "rate": "0",
+      "contact": "(077) 670 7529"
+    },
+    {
+      "id": "26",
+      "name": "Naidas Skin Clinic And Medical Spa",
+      "type": "Skin Care Clinic",
+      "address": "Giron St, Naidas Matias Bldg Don Vicente F. Giron St, Corner J. P. Rizal St, Laoag City, 2900 Ilocos Norte",
+      "municipality": "Laoag City",
+      "province": "Ilocos Norte",
+      "latitude": 18.1986,
+      "longitude": 120.5867,
+      "images": [
+        "naidas_skin_clinic_and_medical_spa_1,naidas_skin_clinic_and_medical_spa_2,naidas_skin_clinic_and_medical_spa_3,naidas_skin_clinic_and_medical_spa_4,naidas_skin_clinic_and_medical_spa_5,naidas_skin_clinic_and_medical_spa_6"
+      ],
+      "rate": "5",
+      "contact": "(077) 771 3497"
+    },
+    {
+      "id": "27",
+      "name": "Brgy. Health Center",
+      "type": "Medical Center",
+      "address": "5HWW+X5M, Gov. C. Ligot, Laoag City, 2900 Ilocos Norte",
+      "municipality": "Laoag City",
+      "province": "Ilocos Norte",
+      "latitude": 18.19745,
+      "longitude": 120.59542,
+      "images": [
+        "brgy_health_center_1,brgy_health_center_2"
+      ],
+      "rate": "0",
+      "contact": ""
+    },
+    {
+      "id": "28",
+      "name": "Medtrust Diagnostic Center",
+      "type": "Diagnostic Center",
+      "address": "Philam Bldg., JP Rizal-Hernando Sts., Brgy. 8 Cor, Laoag City, 2900 Ilocos Norte",
+      "municipality": "Laoag City",
+      "province": "Ilocos Norte",
+      "latitude": 18.19658,
+      "longitude": 120.59124,
+      "images": [
+        "medtrust_diagnostic_center_1"
+      ],
+      "rate": "0",
+      "contact": "090 583 89544"
+    },
+    {
+      "id": "29",
+      "name": "Luis SKIN CLINIC",
+      "type": "Medical Clinic",
+      "address": "5HVX+H38, Jp Rizal, Laoag City, Laoag - Sarrat - Piddig - Solsona Rd, Laoag City, Ilocos Norte",
+      "municipality": "Laoag City",
+      "province": "Ilocos Norte",
+      "latitude": 18.19391,
+      "longitude": 120.59772,
+      "images": [
+        "luis_skin_clinic_1,luis_skin_clinic_2"
+      ],
+      "rate": "4.3",
+      "contact": "(077) 771 3385"
+    },
+    {
+      "id": "30",
+      "name": "Estrella Eent Clinic",
+      "type": "Otolaryngology Clinic",
+      "address": "66 V. Llanes Street, Laoag City, Ilocos Norte",
+      "municipality": "Laoag City",
+      "province": "Ilocos Norte",
+      "latitude": 18.1975,
+      "longitude": 120.59245,
+      "images": [
+        "estrella_eent_clinic_1"
+      ],
+      "rate": "5",
+      "contact": "(077) 771 3385"
+    },
+    {
+      "id": "31",
+      "name": "ENT TI ILI - Dr. Pu\u00c3\u00b1o",
+      "type": "Medical Clinic",
+      "address": "M & P Bueno Building, Hernando, Laoag City, 2900 Ilocos Norte",
+      "municipality": "Laoag City",
+      "province": "Ilocos Norte",
+      "latitude": 18.19616,
+      "longitude": 120.59051,
+      "images": [
+        "ent_ti_ili_dr_puno_1"
+      ],
+      "rate": "1",
+      "contact": "(077) 772 0601"
+    },
+    {
+      "id": "32",
+      "name": "Andres-Barbero Medical Clinic",
+      "type": "Medical Clinic",
+      "address": "5HXV+GCP, Llanes St, Laoag City, 2900 Ilocos Norte",
+      "municipality": "Laoag City",
+      "province": "Ilocos Norte",
+      "latitude": 18.19884,
+      "longitude": 120.59357,
+      "images": [
+        "andres_barbero_medical_clinic_1,andres_barbero_medical_clinic_2"
+      ],
+      "rate": "0",
+      "contact": "(077) 772 0303"
+    },
+    {
+      "id": "33",
+      "name": "CITY HEALTH OFFICE",
+      "type": "Government Office",
+      "address": "Laoag City Hall, Tupaz Street, corner Balintawak, Laoag City, 2900 Ilocos Norte",
+      "municipality": "Laoag City",
+      "province": "Ilocos Norte",
+      "latitude": 18.19444,
+      "longitude": 120.59202,
+      "images": [
+        "city_health_office_1"
+      ],
+      "rate": "0",
+      "contact": "(077) 772 0303"
+    },
+    {
+      "id": "34",
+      "name": "Dingras District Hospital",
+      "type": "Hospital",
+      "address": "4MPH+732, Sarrat, Ilocos Norte",
+      "municipality": "Dingras",
+      "province": "Ilocos Norte",
+      "latitude": 18.13578,
+      "longitude": 120.67765,
+      "images": [
+        "dingras_district_hospital_1"
+      ],
+      "rate": "1",
+      "contact": "(077) 784 7383"
+    },
+    {
+      "id": "35",
+      "name": "Baresbes Health Center",
+      "type": "Community health center",
+      "address": "3P6W+79J, Dingras, Ilocos Norte",
+      "municipality": "Dingras",
+      "province": "Ilocos Norte",
+      "latitude": 18.06075,
+      "longitude": 120.7459,
+      "images": [
+        "baresbes_health_center_1"
+      ],
+      "rate": "0",
+      "contact": ""
+    },
+    {
+      "id": "36",
+      "name": "Dingras Accu- Prime Clinical Laboratory",
+      "type": "Laboratory",
+      "address": "G/F, Mister Donut, Clemente's Bldg, Brgy Albano, Dingras, 2913 Ilocos Norte",
+      "municipality": "Dingras",
+      "province": "Ilocos Norte",
+      "latitude": 18.0805,
+      "longitude": 120.7235,
+      "images": [
+        "dingras_accu_prime_clinical_laboratory_1,dingras_accu_prime_clinical_laboratory_2,dingras_accu_prime_clinical_laboratory_3"
+      ],
+      "rate": "0",
+      "contact": "0998 982 8663"
+    },
+    {
+      "id": "37",
+      "name": "Cabasa Dental Clinic",
+      "type": "Dental Clinic",
+      "address": "3PJF+59X, New Market Bldg Brgy.Albano, Dingras, 2913 Ilocos Norte",
+      "municipality": "Dingras",
+      "province": "Ilocos Norte",
+      "latitude": 18.0805,
+      "longitude": 120.7235,
+      "images": [
+        ""
+      ],
+      "rate": "0",
+      "contact": "0951 128 6881"
+    },
+    {
+      "id": "38",
+      "name": "F.B. TOLENTINO OB-GYNE CLINIC",
+      "type": "Physician",
+      "address": "4M2X+9XG BRGY, Dingras, Ilocos Norte",
+      "municipality": "Dingras",
+      "province": "Ilocos Norte",
+      "latitude": 18.10096,
+      "longitude": 120.69993,
+      "images": [
+        "fb_tolentino_ob_gyne_clinic_1"
+      ],
+      "rate": "0",
+      "contact": "0918 606 3919"
+    },
+    {
+      "id": "39",
+      "name": "The_Black_Nazarene_Hospital_Inc",
+      "type": "Hospital",
+      "address": "29 Col. Bonoan St, San Nicolas, Ilocos Norte",
+      "municipality": "San Nicolas",
+      "province": "Ilocos Norte",
+      "latitude": 18.17381,
+      "longitude": 120.59265,
+      "images": [
+        "the_black_nazarene_hospital_inc_1"
+      ],
+      "rate": "3.2",
+      "contact": "0918 606 3919"
+    },
+    {
+      "id": "40",
+      "name": "Mothering_Center_San_Nicolas",
+      "type": "Hospital",
+      "address": "5H5Q+H37, MacArthur Hwy, San Nicolas, Ilocos Norte",
+      "municipality": "San Nicolas",
+      "province": "Ilocos Norte",
+      "latitude": 18.15892,
+      "longitude": 120.58765,
+      "images": [
+        "mothering_center_san_nicolas_1"
+      ],
+      "rate": "0",
+      "contact": "(0777) 731 757"
+    },
+    {
+      "id": "41",
+      "name": "SANTA_CECILIA_BHS",
+      "type": "Hospital",
+      "address": "5J4C+46R, San Nicolas, Ilocos Norte",
+      "municipality": "San Nicolas",
+      "province": "Ilocos Norte",
+      "latitude": 18.15535,
+      "longitude": 120.62051,
+      "images": [
+        "santa_cecilia_bhs_1"
+      ],
+      "rate": "0",
+      "contact": ""
+    },
+    {
+      "id": "42",
+      "name": "Mariano Marcos Memorial Hospital & Medical Center",
+      "type": "Hospital",
+      "address": "3H65+5M6, Brgy, 6, Ilocos Norte",
+      "municipality": "Batac City",
+      "province": "Ilocos Norte",
+      "latitude": 18.06041,
+      "longitude": 120.55914,
+      "images": [
+        "mariano_marcos_memorial_hospital_medical_center_1,mariano_marcos_memorial_hospital_medical_center_2,mariano_marcos_memorial_hospital_medical_center_3,mariano_marcos_memorial_hospital_medical_center_4,mariano_marcos_memorial_hospital_medical_center_5,mariano_marcos_memorial_hospital_medical_center_6,mariano_marcos_memorial_hospital_medical_center_7,mariano_marcos_memorial_hospital_medical_center_8,mariano_marcos_memorial_hospital_medical_center_9,mariano_marcos_memorial_hospital_medical_center_10"
+      ],
+      "rate": "3.5",
+      "contact": "(077) 600 8000"
+    },
+    {
+      "id": "43",
+      "name": "Gaoat Hospital",
+      "type": "General Hospital",
+      "address": "Castro St, Batac, 2906 Ilocos Norte",
+      "municipality": "Batac City",
+      "province": "Ilocos Norte",
+      "latitude": 18.05032,
+      "longitude": 120.56525,
+      "images": [
+        "gaoat_hospital_1,gaoat_hospital_2,gaoat_hospital_3"
+      ],
+      "rate": "2.3",
+      "contact": "0929 559 9489"
+    },
+    {
+      "id": "44",
+      "name": "Bumanglag Specialty Hospital",
+      "type": "Hospital",
+      "address": "3H78+6FX, Batac-Sarrat Rd, Batac, Ilocos Norte",
+      "municipality": "Batac City",
+      "province": "Ilocos Norte",
+      "latitude": 18.0631,
+      "longitude": 120.56623,
+      "images": [
+        "bumanglag_specialty_hospital_1,bumanglag_specialty_hospital_2,bumanglag_specialty_hospital_3,bumanglag_specialty_hospital_4,bumanglag_specialty_hospital_5,"
+      ],
+      "rate": "4.7",
+      "contact": "0929 559 9489"
+    },
+    {
+      "id": "45",
+      "name": "Paoay ENT clinic",
+      "type": "Hospital",
+      "address": "3G6G+7XG, Paoay, Ilocos Norte",
+      "municipality": "Paoay",
+      "province": "Ilocos Norte",
+      "latitude": 18.0607,
+      "longitude": 120.52744,
+      "images": [
+        "paoay_ent_clinic_1,paoay_ent_clinic_2,paoay_ent_clinic_3,paoay_ent_clinic_4"
+      ],
+      "rate": "5",
+      "contact": "0923 435 2985"
+    },
+    {
+      "id": "46",
+      "name": "RHU Badoc",
+      "type": "Government Hospital",
+      "address": "WFCG+82Q, Badoc, Ilocos Norte",
+      "municipality": "Badoc",
+      "province": "Ilocos Norte",
+      "latitude": 17.92085253352861,
+      "longitude": 120.47510996567807,
+      "images": [
+        "rhu_badoc_1"
+      ],
+      "rate": "0",
+      "contact": ""
+    },
+    {
+      "id": "47",
+      "name": "Karmelli Clinic and Hospital Pinili Inc.",
+      "type": "Hospital",
+      "address": "XF4J+WXV, Pinili, Ilocos Norte",
+      "municipality": "Pinili",
+      "province": "Ilocos Norte",
+      "latitude": 17.957361489224258,
+      "longitude": 120.48242565402236,
+      "images": [
+        "karmelli_clinic_and_hospital_pinili_inc_1,karmelli_clinic_and_hospital_pinili_inc_2,karmelli_clinic_and_hospital_pinili_inc_3"
+      ],
+      "rate": "3",
+      "contact": ""
+    },
+    {
+      "id": "48",
+      "name": "Pinili RHU",
+      "type": "Hospital",
+      "address": "XG3F+C6J, Pinili - Nueva Era Rd, Pinili, Ilocos Norte",
+      "municipality": "Pinili",
+      "province": "Ilocos Norte",
+      "latitude": 17.953589223836214,
+      "longitude": 120.52301008599956,
+      "images": [
+        "pinili_rhu_1"
+      ],
+      "rate": "0",
+      "contact": ""
+    },
+    {
+      "id": "49",
+      "name": "Rural Health Unit",
+      "type": "Medical Center",
+      "address": "WM77+WQQ, Nueva Era, Ilocos Norte",
+      "municipality": "Nueva Era",
+      "province": "Ilocos Norte",
+      "latitude": 17.914905097149227,
+      "longitude": 120.66442303732953,
+      "images": [
+        "rural_health_unit_1"
+      ],
+      "rate": "0",
+      "contact": ""
+    },
+    {
+      "id": "50",
+      "name": "Dona Josefa Edralin Marcos District Hospital",
+      "type": "Hospital",
+      "address": "2MVH+6G5, Marcos, Ilocos Norte",
+      "municipality": "Marcos",
+      "province": "Ilocos Norte",
+      "latitude": 18.04303,
+      "longitude": 120.67885,
+      "images": [
+        "dona_josefa_edralin_marcos_district_hospital_1,dona_josefa_edralin_marcos_district_hospital_2"
+      ],
+      "rate": "0",
+      "contact": ""
+    },
+    {
+      "id": "51",
+      "name": "Rural Health Unit Banna",
+      "type": "Medical Center",
+      "address": "XJFP+FVH, Banna, Ilocos Norte",
+      "municipality": "Banna",
+      "province": "Ilocos Norte",
+      "latitude": 17.973696066146097,
+      "longitude": 120.63724760872721,
+      "images": [
+        ""
+      ],
+      "rate": "2.7",
+      "contact": ""
+    },
+    {
+      "id": "52",
+      "name": "Rural Health Unit",
+      "type": "Medical Center",
+      "address": "XMH3+XPM, Braceros St, Banna, Ilocos Norte",
+      "municipality": "Banna",
+      "province": "Ilocos Norte",
+      "latitude": 17.97998224194134,
+      "longitude": 120.65430197863923,
+      "images": [
+        "rural_health_unit_banna_1"
+      ],
+      "rate": "0",
+      "contact": ""
+    },
+    {
+      "id": "53",
+      "name": "RHU SOLSONA",
+      "type": "Government Hospital",
+      "address": "3QRF+W63, Solsona, Ilocos Norte",
+      "municipality": "Solsona",
+      "province": "Ilocos Norte",
+      "latitude": 18.09226,
+      "longitude": 120.77304,
+      "images": [
+        "rhu_solsona_1"
+      ],
+      "rate": "0",
+      "contact": ""
+    },
+    {
+      "id": "54",
+      "name": "RHU SOLSONA",
+      "type": "Government Hospital",
+      "address": "3QRF+W63, Solsona, Ilocos Norte",
+      "municipality": "Solsona",
+      "province": "Ilocos Norte",
+      "latitude": 18.09226,
+      "longitude": 120.77304,
+      "images": [
+        "rhu_solsona_1"
+      ],
+      "rate": "0",
+      "contact": ""
+    },
+    {
+      "id": "55",
+      "name": "SALUNAAT Hospital",
+      "type": "Hospital",
+      "address": "3QWC+3GG, juan, norte, Solsona, Ilocos Norte",
+      "municipality": "Solsona",
+      "province": "Ilocos Norte",
+      "latitude": 18.09518,
+      "longitude": 120.77133,
+      "images": [
+        "salunaat_hospital_1"
+      ],
+      "rate": "0",
+      "contact": ""
+    },
+    {
+      "id": "56",
+      "name": "Piddig District Hospital",
+      "type": "Hospital",
+      "address": "5P89+945, Piddig, Ilocos Norte",
+      "municipality": "Piddig",
+      "province": "Ilocos Norte",
+      "latitude": 18.16588,
+      "longitude": 120.71786,
+      "images": [
+        "piddig_district_hospital_1"
+      ],
+      "rate": "4",
+      "contact": ""
+    },
+    {
+      "id": "57",
+      "name": "Sarrat RHU",
+      "type": "Hospital",
+      "address": "5J4V+JQ9, Sarrat, Ilocos Norte",
+      "municipality": "Sarrat",
+      "province": "Ilocos Norte",
+      "latitude": 18.15654,
+      "longitude": 120.64447,
+      "images": [
+        "sarrat_rhu_1"
+      ],
+      "rate": "4",
+      "contact": ""
+    },
+    {
+      "id": "58",
+      "name": "Bacarra Medical Center",
+      "type": "Hospital",
+      "address": "7J47+Q36, Bacarra, Ilocos Norte",
+      "municipality": "Bacarra",
+      "province": "Ilocos Norte",
+      "latitude": 18.25692,
+      "longitude": 120.61263,
+      "images": [
+        "bacarra_medical_center_1,bacarra_medical_center_2"
+      ],
+      "rate": "5",
+      "contact": "(077) 670 3150"
+    },
+    {
+      "id": "59",
+      "name": "Dr. Bonifacia V. Albano Memorial Hospital",
+      "type": "Hospital",
+      "address": "7J47+Q36 San Roque II, POB.) , 2916 National Road, Bacarra, Ilocos Norte",
+      "municipality": "Bacarra",
+      "province": "Ilocos Norte",
+      "latitude": 18.25686,
+      "longitude": 120.61234,
+      "images": [
+        "bacarra_medical_center_1,bacarra_medical_center_2"
+      ],
+      "rate": "0",
+      "contact": "(077) 670 3150"
+    },
+    {
+      "id": "60",
+      "name": "RHU Pasuquin",
+      "type": "Medical Center",
+      "address": "8JM9+M8P, 1, Pasuquin, Ilocos Norte",
+      "municipality": "Pasuquin",
+      "province": "Ilocos Norte",
+      "latitude": 18.33421,
+      "longitude": 120.61834,
+      "images": [
+        "rhu_pasuquin_1"
+      ],
+      "rate": "0",
+      "contact": ""
+    },
+    {
+      "id": "61",
+      "name": "INELCORS ARSY ICE POWER & PLANT",
+      "type": "General Hospital",
+      "address": "A 1 Antipolo Rizal Plaza Barrio Santo Thomaso",
+      "municipality": "Pasuquin",
+      "province": "Ilocos Norte",
+      "latitude": 18.34833,
+      "longitude": 120.60329,
+      "images": [
+        ""
+      ],
+      "rate": "0",
+      "contact": ""
+    },
+    {
+      "id": "62",
+      "name": "Burgos Municipal Health Office",
+      "type": "Government Office",
+      "address": "GM72+M23, Burgos, Ilocos Norte",
+      "municipality": "Burgos",
+      "province": "Ilocos Norte",
+      "latitude": 18.51423,
+      "longitude": 120.64999,
+      "images": [
+        "burgos_municipal_health_office_1"
+      ],
+      "rate": "0",
+      "contact": ""
+    },
+    {
+      "id": "63",
+      "name": "Bangui District Hospital",
+      "type": "Hospital",
+      "address": "GQM6+7QP, 1, Bangui, Ilocos Norte",
+      "municipality": "Bangui",
+      "province": "Ilocos Norte",
+      "latitude": 18.5332,
+      "longitude": 120.76197,
+      "images": [
+        ""
+      ],
+      "rate": "3",
+      "contact": ""
+    },
+    {
+      "id": "64",
+      "name": "Bangui District Hospital - Pagudpud Extension",
+      "type": "Government Hospital",
+      "address": "HW2H+F2X, 1, Pagudpud, Ilocos Norte",
+      "municipality": "Bangui",
+      "province": "Ilocos Norte",
+      "latitude": 18.55125,
+      "longitude": 120.9276,
+      "images": [
+        "bangui_district_hospital_pagudpud_extension_1"
+      ],
+      "rate": "3",
+      "contact": ""
+    },
+    {
+      "id": "65",
+      "name": "Bangui Municipal Health Office",
+      "type": "Hospital",
+      "address": "GQP7+HXH, Bangui, Ilocos Norte",
+      "municipality": "Bangui",
+      "province": "Ilocos Norte",
+      "latitude": 18.53645,
+      "longitude": 120.76498,
+      "images": [
+        "bangui_municipal_health_office_1"
+      ],
+      "rate": "0",
+      "contact": ""
+    },
+    {
+      "id": "66",
+      "name": "Bangui ENT Clinic",
+      "type": "Hospital",
+      "address": "GQQ8+6JG, Bangui, Ilocos Norte",
+      "municipality": "Bangui",
+      "province": "Ilocos Norte",
+      "latitude": 18.53806,
+      "longitude": 120.76657,
+      "images": [
+        "bangui_ent_clinic_1,bangui_ent_clinic_2,bangui_ent_clinic_3"
+      ],
+      "rate": "5",
+      "contact": "0923 435 2985"
+    },
+    {
+      "id": "66",
+      "name": "Bangui District Hospital - Pagudpud Extension",
+      "type": "Government Hospital",
+      "address": "HW2H+F2X, 1, Pagudpud, Ilocos Norte",
+      "municipality": "Bangui",
+      "province": "Ilocos Norte",
+      "latitude": 18.55124,
+      "longitude": 120.9276,
+      "images": [
+        "bangui_district_hospital_pagudpud_extension_1"
+      ],
+      "rate": "3",
+      "contact": ""
+    },
+    {
+      "id": "67",
+      "name": "MUNICIPAL HEALTH OFFICE",
+      "type": "Government Office",
+      "address": "GRC5+RFJ, Bangui-Dumalneg Rd, Dumalneg, Ilocos Norte",
+      "municipality": "Dumalneg",
+      "province": "Ilocos Norte",
+      "latitude": 18.52208,
+      "longitude": 120.80865,
+      "images": [
+        "dumalneg_municipal_health_office_1"
+      ],
+      "rate": "0",
+      "contact": ""
+    },
+    {
+      "id": "68",
+      "name": "Vintar District Hospital",
+      "type": "Hospital",
+      "address": "Brgy. 25 Tamdagan, Vintar, Hilagang Ilokos",
+      "municipality": "Vintar",
+      "province": "Ilocos Norte",
+      "latitude": 18.32863,
+      "longitude": 120.73325,
+      "images": [
+        "vintar_district_hospital_1"
+      ],
+      "rate": "3",
+      "contact": ""
+    },
+    {
+      "id": "69",
+      "name": "Tamdagan Hospital",
+      "type": "Hospital",
+      "address": "8PHM+F7X, Vintar, Ilocos Norte",
+      "municipality": "Vintar",
+      "province": "Ilocos Norte",
+      "latitude": 18.32875,
+      "longitude": 120.73324,
+      "images": [
+        "tamdagan_hospital_1"
+      ],
+      "rate": "5",
+      "contact": ""
+    },
+    {
+      "id": "70",
+      "name": "Municipal Health Office",
+      "type": "Government Office",
+      "address": "Currimao Municipal Hall, Currimao-Paoay-Suba-Balacao Road, 2903, Currimao, Ilocos Norte",
+      "municipality": "Curimao",
+      "province": "Ilocos Norte",
+      "latitude": 18.01994,
+      "longitude": 120.48644,
+      "images": [
+        "currimao_municipal_health_office_1"
+      ],
+      "rate": "5",
+      "contact": "0776701301"
+    }
+  ]

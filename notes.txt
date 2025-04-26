@@ -1,0 +1,26 @@
+link=https://www.waze.com/live-map/directions/ph/ilocos-region/laoag-city/our-lady-of-fatima-medical-clinic-and-hospital?to=place.ChIJAe8RAZ_IjjMRbQYFvl2l7Pw&from=place.ChIJs0xcMjHJjjMRWFRUmAWOVkA
+link=https://www.waze.com/live-map/directions/ph/ilocos-region/laoag-city/our-lady-of-fatima-medical-clinic-and-hospital?to=place.ChIJAe8RAZ_IjjMRbQYFvl2l7Pw
+
+ (Laoag City, 18.1975, 120.5931)
+    ("Batac City", 18.0026, 120.5935),
+    ("Adams", 18.4344, 120.8128),
+    ("Bacarra", 18.2908, 120.5603),
+    ("Badoc", 18.3365, 120.5449),
+    ("Bangui", 18.3749, 120.4594),
+    ("Banna", 18.2667, 120.5549),
+    ("Burgos", 18.3833, 120.5297),
+    ("Carasi", 18.5578, 120.6889),
+    ("Currimao", 18.2122, 120.3661),
+    ("Dingras", 18.2658, 120.5460),
+    ("Dumalneg", 18.5319, 120.8310),
+    ("Marcos", 18.0083, 120.7211),
+    ("Nueva Era", 17.7819, 120.9086),
+    ("Pagudpud", 18.5167, 120.8653),
+    ("Paoay", 18.0333, 120.4667),
+    ("Pasuquin", 18.4636, 120.5125),
+    ("Piddig", 18.0764, 120.6317),
+    ("Pinili", 18.0850, 120.6117),
+    ("San Nicolas", 18.2133, 120.6097),
+    ("Sarrat", 18.2514, 120.5878),
+    ("Solsona", 18.3017, 120.5611),
+    ("Vintar", 18.3667, 120.5150)

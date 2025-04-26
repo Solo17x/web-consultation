@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="card shadow-lg">
+        <div class="card-header bg-primary text-white text-center">
+            <h3 class="mb-0">Doctor Profile</h3>
+        </div>
+        
+        <div class="card-body">
+            <div class="text-center mb-4">
+                <!-- Display Profile Picture -->
+                {% if doctor.profile_picture %}
+                    <img src="{{ url_for('uploaded_file', filename=doctor.profile_picture) }}" 
+                         alt="Profile Picture" 
+                         class="img-fluid rounded-circle shadow-lg border border-3 border-primary" 
+                         style="width: 180px; height: 180px; object-fit: cover;">
+                {% else %}
+                    <img src="{{ url_for('static', filename='uploads/default.jpg') }}" 
+                         alt="Default Profile Picture" 
+                         class="img-fluid rounded-circle shadow-lg border border-3 border-secondary" 
+                         style="width: 180px; height: 180px; object-fit: cover;">
+                {% endif %}
+            </div>
+            
+            <!-- Doctor's Name and Email -->
+            <h4 class="text-center">{{ doctor.full_name }}</h4>
+            <p class="text-muted text-center">{{ doctor.email }}</p>
+
+            <!-- Email Verification Status -->
+            <p class="text-center"><strong>Email Verified:</strong> 
+                {% if doctor.email_verified %}
+                    <span class="text-success">Yes ✅</span>
+                {% else %}
+                    <span class="text-danger">No ❌</span>
+                {% endif %}
+            </p>
+            
+            <hr>
+
+            <!-- Doctor's Details -->
+            <div class="row">
+                <div class="col-md-6">
+                    <p><strong>Phone:</strong> {{ doctor.phone }}</p>
+                    <p><strong>Date of Birth:</strong> {{ doctor.dob.strftime('%Y-%m-%d') if doctor.dob else 'N/A' }}</p>
+                    <p><strong>Gender:</strong> {{ doctor.gender }}</p>
+                    <p><strong>Specialization:</strong> {{ doctor.specialization }}</p>
+                    <p><strong>Medical License:</strong> {{ doctor.medical_license }}</p>
+                </div>
+                <div class="col-md-6">
+                    <p><strong>Years of Experience:</strong> {{ doctor.experience }}</p>
+                    <p><strong>Qualifications:</strong> {{ doctor.qualifications }}</p>
+                    <p><strong>Hospital/Clinic:</strong> {{ doctor.hospital_clinic }}</p>
+                    <p><strong>Availability:</strong> {{ doctor.availability }}</p>
+                    <p><strong>LinkedIn:</strong> 
+                        {% if doctor.linkedin %}
+                            <a href="{{ doctor.linkedin }}" target="_blank">View Profile</a>
+                        {% else %}
+                            N/A
+                        {% endif %}
+                    </p>
+                    <p><strong>Country:</strong> {{ doctor.country }}</p>
+                    <p><strong>City:</strong> {{ doctor.city }}</p>
+                    <p><strong>Short Bio:</strong> {{ doctor.short_bio }}</p>
+                </div>
+            </div>
+
+            <hr>
+
+            <div class="text-center">
+                <a href="{{ url_for('dashboard.patient_dashboard') }}" class="btn btn-secondary">Back to Dashboard</a>
+            </div>
+  
+        </div>
+    </div>
+</div>
+{% endblock %}

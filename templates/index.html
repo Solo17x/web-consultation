@@ -1,0 +1,148 @@
+{% extends 'base.html' %}
+
+{% block title %}Medical News{% endblock %}
+
+{% block content %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+ 
+
+
+
+
+    <!-- Hero Section -->
+    <section class="hero bg-primary text-white text-center py-5">
+        <div class="container hero-content">
+            <h1 class="display-4 fw-bold mb-4">Welcome to the Online Consultation Platform</h1>
+            <p class="lead mb-5">Connect with certified doctors from anywhere in the world.</p>
+            <div class="d-flex justify-content-center flex-wrap">
+                <a href="{{ url_for('auth.register_patient') }}" class="btn btn-light btn-lg me-2 mb-3">
+                    <i class="fas fa-user-plus me-2"></i>Register as Patient
+                </a>
+                <a href="{{ url_for('auth.register_doctor') }}" class="btn btn-light btn-lg mb-3">
+                    <i class="fas fa-user-md me-2"></i>Register as Doctor
+                </a>
+            </div>
+        </div>
+        <div class="wave-divider">
+            <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" class="shape-fill"></path>
+            </svg>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features mt-5 py-5 bg-light">
+        <div class="container">
+            <h2 class="text-center mb-5 fw-bold">Our Services</h2>
+            <div class="row">
+                <div class="col-md-4 text-center">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-calendar-check fa-2x"></i>
+                        </div>
+                        <h5 class="mt-4 mb-3 fw-bold">Check our mobile application</h5>
+                        <p>An AI Powered Offline about alternative home remedies</p>
+                        <a href="{{ url_for('feature') }}" class="btn btn-primary mt-3">
+                            <i class="fas fa-download me-2"></i>Click me !!!
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-4 text-center">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-search fa-2x"></i>
+                        </div>
+                        <h5 class="mt-4 mb-3 fw-bold">Search Doctors</h5>
+                        <p>Find doctors based on specialization, location, and availability.</p>
+                        <a href="#" class="btn btn-primary mt-3">
+                            <i class="fas fa-user-md me-2"></i>Find Now
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-4 text-center">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-info-circle fa-2x"></i>
+                        </div>
+                        <h5 class="mt-4 mb-3 fw-bold">Learn More</h5>
+                        <p>Explore medical news, articles, and health tips from reliable sources.</p>
+                        <a href="#" class="btn btn-primary mt-3">
+                            <i class="fas fa-book-medical me-2"></i>Explore
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials bg-light py-5">
+        <div class="container">
+            <h2 class="text-center mb-5 fw-bold">What Our Users Are Saying</h2>
+            <div class="row">
+                <div class="col-md-6 mb-4">
+                    <div class="testimonial">
+                        <p>"The consultation process was simple and easy. I felt comfortable with the doctor, and the advice I received was exactly what I needed. Highly recommend!"</p>
+                        <div class="d-flex align-items-center mt-3">
+                            <img src="/api/placeholder/60/60" alt="User" class="rounded-circle me-3">
+                            <div>
+                                <p class="mb-1"><strong>John Doe</strong></p>
+                                <p class="text-muted mb-0">Patient</p>
+                                <div class="text-warning">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <div class="testimonial">
+                        <p>"As a doctor, this platform allows me to connect with patients quickly and efficiently, making healthcare more accessible for everyone."</p>
+                        <div class="d-flex align-items-center mt-3">
+                            <img src="/api/placeholder/60/60" alt="Doctor" class="rounded-circle me-3">
+                            <div>
+                                <p class="mb-1"><strong>Dr. Jane Smith</strong></p>
+                                <p class="text-muted mb-0">General Doctor</p>
+                                <div class="text-warning">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta bg-primary text-white text-center py-5">
+        <div class="container cta-content">
+            <h2 class="display-4 fw-bold mb-4">Ready to get started?</h2>
+            <p class="lead mb-4">Join us today and take the first step towards better health and well-being.</p>
+            <div class="d-flex justify-content-center flex-wrap">
+                <a href="{{ url_for('auth.register_patient') }}" class="btn btn-light btn-lg me-2 mb-3">
+                    <i class="fas fa-user-plus me-2"></i>Register as Patient
+                </a>
+                <a href="{{ url_for('auth.register_doctor') }}" class="btn btn-light btn-lg mb-3">
+                    <i class="fas fa-user-md me-2"></i>Register as Doctor
+                </a>
+            </div>
+        </div>
+    </section>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+{% endblock %}
+
+

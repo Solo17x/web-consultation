@@ -1,0 +1,147 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container mt-4">
+    <h2 class="mb-4 text-center text-md-start">Admin Dashboard</h2>
+
+    <!-- Total Counts -->
+    <div class="row mb-4">
+        <div class="col-sm-12 col-md-6 mb-3 mb-md-0">
+            <div class="card text-white bg-info h-100">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Total Patients</h5>
+                    <p class="card-text" id="total-patients">{{ total_patients or 'N/A' }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12 col-md-6">
+            <div class="card text-white bg-primary h-100">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Total Doctors</h5>
+                    <p class="card-text" id="total-doctors">{{ total_doctors or 'N/A' }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Patients and Doctors -->
+    <div class="row">
+        <!-- Patients -->
+        <div class="col-12 col-lg-6 mb-4">
+            <h4>Patients</h4>
+
+            <!-- Search Bar -->
+            <div class="mb-3">
+                <input type="text" id="search-patient" class="form-control" placeholder="Search Patients by name or email" onkeyup="debounceSearch('patient')">
+            </div>
+
+            <!-- Table -->
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover text-nowrap">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>ID</th>
+                            <th>Full Name</th>
+                            <th>Email</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="patient-table-body">
+                        {% for patient in patients %}
+                        <tr>
+                            <td>{{ patient.id }}</td>
+                            <td>{{ patient.full_name }}</td>
+                            <td>{{ patient.email }}</td>
+                            <td><a href="{{ url_for('dashboard.view_patient', patient_id=patient.id) }}" class="btn btn-info btn-sm">View</a></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Doctors -->
+        <div class="col-12 col-lg-6 mb-4">
+            <h4>Doctors</h4>
+
+            <!-- Search Bar -->
+            <div class="mb-3">
+                <input type="text" id="search-doctor" class="form-control" placeholder="Search Doctors by name or email" onkeyup="debounceSearch('doctor')">
+            </div>
+
+            <!-- Table -->
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover text-nowrap">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>ID</th>
+                            <th>Full Name</th>
+                            <th>Email</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="doctor-table-body">
+                        {% for doctor in doctors %}
+                        <tr>
+                            <td>{{ doctor.id }}</td>
+                            <td>{{ doctor.full_name }}</td>
+                            <td>{{ doctor.email }}</td>
+                            <td><a href="{{ url_for('dashboard.view_doctor', doctor_id=doctor.id) }}" class="btn btn-info btn-sm">View</a></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Search Script -->
+<script>
+let searchTimeout;
+
+function debounceSearch(type) {
+    clearTimeout(searchTimeout);
+    searchTimeout = setTimeout(() => searchUsers(type), 300);
+}
+
+function searchUsers(type) {
+    let query = "";
+    if (type === "patient") {
+        query = document.getElementById("search-patient").value.trim();
+    } else if (type === "doctor") {
+        query = document.getElementById("search-doctor").value.trim();
+    }
+
+    fetch(`{{ url_for('dashboard.search_users') }}?type=${type}&query=${query}`)
+        .then(response => response.json())
+        .then(data => {
+            if (type === "patient") {
+                const patientBody = document.getElementById("patient-table-body");
+                patientBody.innerHTML = "";
+                data.patients.forEach(user => {
+                    patientBody.innerHTML += `
+                        <tr>
+                            <td>${user.id}</td>
+                            <td>${user.name}</td>
+                            <td>${user.email}</td>
+                            <td><a href="/dashboard/view_patient/${user.id}" class="btn btn-info btn-sm">View</a></td>
+                        </tr>`;
+                });
+            } else if (type === "doctor") {
+                const doctorBody = document.getElementById("doctor-table-body");
+                doctorBody.innerHTML = "";
+                data.doctors.forEach(user => {
+                    doctorBody.innerHTML += `
+                        <tr>
+                            <td>${user.id}</td>
+                            <td>${user.name}</td>
+                            <td>${user.email}</td>
+                            <td><a href="/dashboard/view_doctor/${user.id}" class="btn btn-info btn-sm">View</a></td>
+                        </tr>`;
+                });
+            }
+        })
+        .catch(error => console.error("Error fetching users:", error));
+}
+</script>
+{% endblock %}

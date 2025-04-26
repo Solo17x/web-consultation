@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container d-flex justify-content-center align-items-center min-vh-100">
+    <div class="w-100" style="max-width: 500px;">
+        <div class="card shadow-lg p-4">
+            <h3 class="text-center mb-4">Join a Meeting</h3>
+            <form method="POST" action="{{ url_for('dashboard.join_meeting') }}">
+                <div class="form-group mb-3">
+                    <label for="roomID">Room ID</label>
+                    <input type="text" class="form-control" id="roomID" name="roomID" placeholder="Enter Room ID" required>
+                </div>
+                <button type="submit" class="btn btn-primary w-100">Join Meeting</button>
+            </form>
+            <a href="{{ url_for('dashboard.patient_dashboard') }}" class="btn btn-secondary w-100 mt-3">← Back to Dashboard</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

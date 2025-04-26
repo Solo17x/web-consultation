@@ -1,0 +1,188 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="card shadow-lg">
+        <div class="card-header bg-primary text-white text-center">
+            <h3 class="mb-0">Edit Doctor Profile</h3>
+        </div>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <div id="flash-messages">
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                        {{ message }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+        
+        <div class="card-body">
+            <form method="POST" enctype="multipart/form-data">
+                <!-- Personal Information -->
+                <fieldset class="border p-3 mb-4">
+                    <legend class="w-auto text-primary fw-bold">Personal Information</legend>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="full_name" class="form-label">Full Name</label>
+                            <input type="text" class="form-control" id="full_name" name="full_name" value="{{ doctor.full_name }}" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="phone" class="form-label">Phone Number</label>
+                            <input type="text" class="form-control" id="phone" name="phone" value="{{ doctor.phone }}" required 
+                                   pattern="09\d{9}" maxlength="11" placeholder="09XXXXXXXXX" title="Phone number must start with '09' and be 11 digits long">
+                        </div>
+                        
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="dob" class="form-label">Date of Birth (YYYY-MM-DD)</label>
+                            <input type="text" class="form-control" id="dob" name="dob" value="{{ doctor.dob.strftime('%Y-%m-%d') if doctor.dob else '' }}" required placeholder="YYYY-MM-DD">
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="gender" class="form-label">Gender</label>
+                            <select class="form-control" id="gender" name="gender" required>
+                                <option value="Male" {% if doctor.gender == 'Male' %}selected{% endif %}>Male</option>
+                                <option value="Female" {% if doctor.gender == 'Female' %}selected{% endif %}>Female</option>
+                                <option value="Other" {% if doctor.gender == 'Other' %}selected{% endif %}>Other</option>
+                            </select>
+                        </div>
+                    </div>
+                </fieldset>
+
+                <!-- Profile Picture -->
+                <fieldset class="border p-3 mb-4">
+                    <legend class="w-auto text-primary fw-bold">Profile Picture</legend>
+                    <div class="mb-3">
+                        <label for="profile_picture" class="form-label">Upload New Profile Picture</label>
+                        <input type="file" class="form-control" id="profile_picture" name="profile_picture" accept="image/*">
+                    </div>
+                </fieldset>
+
+                <!-- Professional Information -->
+                <fieldset class="border p-3 mb-4">
+                    <legend class="w-auto text-primary fw-bold">Professional Information</legend>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="medical_license" class="form-label">Medical License Number</label>
+                            <input type="text" class="form-control" id="medical_license" name="medical_license" value="{{ doctor.medical_license }}" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="specialization" class="form-label">Specialization</label>
+                            <input type="text" class="form-control" id="specialization" name="specialization" value="{{ doctor.specialization }}" required readonly>
+                        </div>
+                        
+                    </div>
+                    <div class="mb-3">
+                        <label for="experience" class="form-label">Years of Experience</label>
+                        <input type="number" class="form-control" id="experience" name="experience" value="{{ doctor.experience }}" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="qualifications" class="form-label">Qualifications</label>
+                        <select class="form-control" id="qualifications" name="qualifications" required>
+                            <option value="" disabled>Select Qualification</option>
+                            <option value="Doctorate" {% if doctor.qualifications == 'Doctorate' %}selected{% endif %}>Doctorate</option>
+                            <option value="Master's" {% if doctor.qualifications == "Master's" %}selected{% endif %}>Master's</option>
+                            <option value="Other" {% if doctor.qualifications == 'Other' %}selected{% endif %}>Other</option>
+                        </select>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="hospital_clinic" class="form-label">Hospital/Clinic</label>
+                        
+                        <!-- Dropdown to select the hospital/clinic -->
+                        <select class="form-control" id="hospital_clinic" name="hospital_clinic" required>
+                            <option value="" disabled>Select Clinic</option>
+                            {% for clinic in clinics_data %}
+                                <option value="{{ clinic.name }}" 
+                                    {% if doctor.hospital_clinic == clinic.name %}selected{% endif %}>
+                                    {{ clinic.name }}
+                                </option>
+                            {% endfor %}
+                        </select>
+                                            <!-- Hidden fields for latitude and longitude -->
+                        <input type="hidden" id="latitude" name="latitude" value="{{ doctor.latitude if doctor.latitude else '' }}">
+                        <input type="hidden" id="longitude" name="longitude" value="{{ doctor.longitude if doctor.longitude else '' }}">
+                        
+                    </div>
+
+                </fieldset>
+
+                <!-- Location Information -->
+                <fieldset class="border p-3 mb-4">
+                    <legend class="w-auto text-primary fw-bold">Location Information</legend>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="country" class="form-label">Province</label>
+                            <input type="text" class="form-control" id="country" name="country" value="{{ doctor.country }}" required readonly>
+                        </div>
+                        <div class="mb-3">
+                            <label for="city" class="form-label">Municipality</label>
+                            <select class="form-control" id="city" name="city" required>
+                                <option value="" disabled>Select City</option>
+                                <option value="Laoag" {% if doctor.city == 'Laoag' %}selected{% endif %}>Laoag</option>
+                                <option value="Batac" {% if doctor.city == 'Batac' %}selected{% endif %}>Batac</option>
+                                <option value="Vintar" {% if doctor.city == 'Vintar' %}selected{% endif %}>Vintar</option>
+                                <option value="Paoay" {% if doctor.city == 'Paoay' %}selected{% endif %}>Paoay</option>
+                                <option value="Sarrat" {% if doctor.city == 'Sarrat' %}selected{% endif %}>Sarrat</option>
+                                <option value="San Nicolas" {% if doctor.city == 'San Nicolas' %}selected{% endif %}>San Nicolas</option>
+                                <option value="Piddig" {% if doctor.city == 'Piddig' %}selected{% endif %}>Piddig</option>
+                                <option value="Currimao" {% if doctor.city == 'Currimao' %}selected{% endif %}>Currimao</option>
+                                <option value="Badoc" {% if doctor.city == 'Badoc' %}selected{% endif %}>Badoc</option>
+                                <option value="Dingras" {% if doctor.city == 'Dingras' %}selected{% endif %}>Dingras</option>
+                                <option value="Pasuquin" {% if doctor.city == 'Pasuquin' %}selected{% endif %}>Pasuquin</option>
+                                <option value="Solsona" {% if doctor.city == 'Solsona' %}selected{% endif %}>Solsona</option>
+                                <option value="Bacarra" {% if doctor.city == 'Bacarra' %}selected{% endif %}>Bacarra</option>
+                                <option value="Adams" {% if doctor.city == 'Adams' %}selected{% endif %}>Adams</option>
+                                <option value="Dumalneg" {% if doctor.city == 'Dumalneg' %}selected{% endif %}>Dumalneg</option>
+                                <option value="Marcos" {% if doctor.city == 'Marcos' %}selected{% endif %}>Marcos</option>
+                                <option value="Nueva Era" {% if doctor.city == 'Nueva Era' %}selected{% endif %}>Nueva Era</option>
+                                <option value="Pagudpud" {% if doctor.city == 'Pagudpud' %}selected{% endif %}>Pagudpud</option>
+                                <option value="Banna" {% if doctor.city == 'Banna' %}selected{% endif %}>Banna</option>
+                                <option value="Paoay" {% if doctor.city == 'Paoay' %}selected{% endif %}>Paoay</option>
+                            </select>
+                        </div>
+                        
+                    </div>
+                </fieldset>
+
+                <!-- Availability -->
+                <fieldset class="border p-3 mb-4">
+                    <legend class="w-auto text-primary fw-bold">Availability Schedule</legend>
+                    <div class="mb-3">
+                        <label for="availability" class="form-label">Available Days & Times</label>
+                        <textarea class="form-control" id="availability" name="availability" required>{{ doctor.availability }}</textarea>
+                    </div>
+                </fieldset>
+
+                <!-- Short Bio and Social Links -->
+                <fieldset class="border p-3 mb-4">
+                    <legend class="w-auto text-primary fw-bold">Additional Information</legend>
+                    <div class="mb-3">
+                        <label for="short_bio" class="form-label">Short Bio</label>
+                        <textarea class="form-control" id="short_bio" name="short_bio" required>{{ doctor.short_bio }}</textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="linkedin" class="form-label">LinkedIn Profile (Optional)</label>
+                        <input type="text" class="form-control" id="linkedin" name="linkedin" value="{{ doctor.linkedin }}">
+                    </div>
+                </fieldset>
+
+                <button type="submit" class="btn btn-primary w-100">Update Profile</button>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- Auto-hide flash messages after 3 seconds -->
+<script>
+    setTimeout(function() {
+        let alerts = document.querySelectorAll('.alert');
+        alerts.forEach(alert => {
+            let bsAlert = new bootstrap.Alert(alert);
+            bsAlert.close();
+        });
+    }, 3000);
+</script>
+{% endblock %}

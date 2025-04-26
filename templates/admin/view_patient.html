@@ -1,0 +1,234 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="card border-0 shadow-lg rounded-lg">
+        <!-- Header with gradient background -->
+        <div class="card-header bg-gradient-primary text-white text-center p-4 rounded-top">
+            <h3 class="font-weight-bold mb-0">Patient Profile</h3>
+        </div>
+
+        <div class="card-body p-0">
+            <div class="row g-0">
+                <!-- Left sidebar with profile info -->
+                <div class="col-lg-4 border-end bg-light">
+                    <div class="p-4 text-center">
+                        {% if patient.profile_picture %}
+                            <div class="position-relative d-inline-block mb-4">
+                                <img src="{{ url_for('uploaded_file', filename=patient.profile_picture) }}"
+                                    alt="Profile Picture"
+                                    class="img-fluid rounded-circle shadow border border-3 border-white"
+                                    style="width: 200px; height: 200px; object-fit: cover;">
+                            </div>
+                        {% else %}
+                            <div class="position-relative d-inline-block mb-4">
+                                <img src="{{ url_for('static', filename='uploads/default.jpg') }}"
+                                    alt="Default Profile Picture"
+                                    class="img-fluid rounded-circle shadow border border-3 border-white"
+                                    style="width: 200px; height: 200px; object-fit: cover;">
+                            </div>
+                        {% endif %}
+
+                        <h4 class="fw-bold mb-1">{{ patient.full_name }}</h4>
+                        <p class="text-muted small">{{ patient.email }}</p>
+
+                        <div class="d-flex justify-content-center align-items-center mb-3">
+                            <span class="badge rounded-pill {% if patient.email_verified %}bg-success{% else %}bg-danger{% endif %} px-3 py-2">
+                                {% if patient.email_verified %}
+                                    <i class="fas fa-check-circle me-1"></i> Email Verified
+                                {% else %}
+                                    <i class="fas fa-times-circle me-1"></i> Email Not Verified
+                                {% endif %}
+                            </span>
+                        </div>
+
+                        <hr>
+
+                        <div class="text-start">
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="me-3 bg-primary bg-opacity-10 p-2 rounded-circle">
+                                    <i class="fas fa-phone text-primary"></i>
+                                </div>
+                                <div>
+                                    <p class="text-muted small mb-0">Phone</p>
+                                    <p class="fw-semibold mb-0">{{ patient.phone }}</p>
+                                </div>
+                            </div>
+
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="me-3 bg-primary bg-opacity-10 p-2 rounded-circle">
+                                    <i class="fas fa-calendar text-primary"></i>
+                                </div>
+                                <div>
+                                    <p class="text-muted small mb-0">Date of Birth</p>
+                                    <p class="fw-semibold mb-0">{{ patient.dob.strftime('%Y-%m-%d') if patient.dob else 'N/A' }}</p>
+                                </div>
+                            </div>
+
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="me-3 bg-primary bg-opacity-10 p-2 rounded-circle">
+                                    <i class="fas fa-user text-primary"></i>
+                                </div>
+                                <div>
+                                    <p class="text-muted small mb-0">Gender</p>
+                                    <p class="fw-semibold mb-0">{{ patient.gender }}</p>
+                                </div>
+                            </div>
+
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="me-3 bg-primary bg-opacity-10 p-2 rounded-circle">
+                                    <i class="fas fa-tint text-primary"></i>
+                                </div>
+                                <div>
+                                    <p class="text-muted small mb-0">Blood Type</p>
+                                    <p class="fw-semibold mb-0">{{ patient.blood_type }}</p>
+                                </div>
+                            </div>
+
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="me-3 bg-primary bg-opacity-10 p-2 rounded-circle">
+                                    <i class="fas fa-map-marker-alt text-primary"></i>
+                                </div>
+                                <div>
+                                    <p class="text-muted small mb-0">Location</p>
+                                    <p class="fw-semibold mb-0">{{ patient.city }}, {{ patient.province }}, {{ patient.country }}</p>
+                                </div>
+                            </div>
+
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="me-3 bg-primary bg-opacity-10 p-2 rounded-circle">
+                                    <i class="fas fa-language text-primary"></i>
+                                </div>
+                                <div>
+                                    <p class="text-muted small mb-0">Preferred Language</p>
+                                    <p class="fw-semibold mb-0">{{ patient.preferred_language }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right content area with tabs -->
+                <div class="col-lg-8">
+                    <div class="p-4">
+                        <ul class="nav nav-tabs mb-4" id="patientTab" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link active fw-semibold" id="medical-tab" data-bs-toggle="tab" data-bs-target="#medical" 
+                                        type="button" role="tab" aria-controls="medical" aria-selected="true">
+                                    Medical Information
+                                </button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link fw-semibold" id="emergency-tab" data-bs-toggle="tab" data-bs-target="#emergency" 
+                                        type="button" role="tab" aria-controls="emergency" aria-selected="false">
+                                    Emergency Contact
+                                </button>
+                            </li>
+                        </ul>
+
+                        <div class="tab-content" id="patientTabContent">
+                            <!-- Medical Info Tab -->
+                            <div class="tab-pane fade show active" id="medical" role="tabpanel" aria-labelledby="medical-tab">
+                                <!-- Current Medication -->
+                                <div class="card border-0 shadow-sm rounded-3 mb-4">
+                                    <div class="card-body">
+                                        <div class="d-flex align-items-center mb-3">
+                                            <div class="bg-primary bg-opacity-10 p-3 rounded-circle me-3">
+                                                <i class="fas fa-pills text-primary fa-lg"></i>
+                                            </div>
+                                            <h5 class="card-title fw-bold text-primary mb-0">Allergies</h5>
+                                        </div>
+                                        
+                                        {% if patient.current_medication %}
+                                            <div class="bg-light p-3 rounded-3">
+                                                <p class="mb-0">{{ patient.current_medication }}</p>
+                                            </div>
+                                        {% else %}
+                                            <div class="bg-light p-3 rounded-3">
+                                                <p class="text-muted mb-0">No current medications listed</p>
+                                            </div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+
+                                <!-- Past Surgeries -->
+                                <div class="card border-0 shadow-sm rounded-3">
+                                    <div class="card-body">
+                                        <div class="d-flex align-items-center mb-3">
+                                            <div class="bg-primary bg-opacity-10 p-3 rounded-circle me-3">
+                                                <i class="fas fa-procedures text-primary fa-lg"></i>
+                                            </div>
+                                            <h5 class="card-title fw-bold text-primary mb-0">Past Surgeries</h5>
+                                        </div>
+                                        
+                                        {% if patient.past_surgeries %}
+                                            <div class="bg-light p-3 rounded-3">
+                                                <p class="mb-0">{{ patient.past_surgeries }}</p>
+                                            </div>
+                                        {% else %}
+                                            <div class="bg-light p-3 rounded-3">
+                                                <p class="text-muted mb-0">No past surgeries listed</p>
+                                            </div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Emergency Contact Tab -->
+                            <div class="tab-pane fade" id="emergency" role="tabpanel" aria-labelledby="emergency-tab">
+                                <div class="card border-0 shadow-sm rounded-3">
+                                    <div class="card-body">
+                                        <div class="d-flex align-items-center mb-4">
+                                            <div class="bg-danger bg-opacity-10 p-3 rounded-circle me-3">
+                                                <i class="fas fa-exclamation-triangle text-danger fa-lg"></i>
+                                            </div>
+                                            <h5 class="card-title fw-bold text-danger mb-0">Emergency Contact</h5>
+                                        </div>
+                                        
+                                        <div class="row">
+                                            <div class="col-md-6 mb-3">
+                                                <div class="card h-100 border-0 bg-light rounded-3">
+                                                    <div class="card-body">
+                                                        <p class="text-muted small mb-1">Contact Name</p>
+                                                        <h5 class="fw-bold mb-0">{{ patient.emergency_contact_name }}</h5>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 mb-3">
+                                                <div class="card h-100 border-0 bg-light rounded-3">
+                                                    <div class="card-body">
+                                                        <p class="text-muted small mb-1">Contact Phone</p>
+                                                        <h5 class="fw-bold mb-0">{{ patient.emergency_contact_phone }}</h5>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="alert alert-info mt-3">
+                                            <div class="d-flex">
+                                                <div class="me-3">
+                                                    <i class="fas fa-info-circle text-info"></i>
+                                                </div>
+                                                <div>
+                                                    <p class="mb-0">This contact should be reached in case of emergency situations only.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer Actions -->
+            <div class="card-footer bg-white p-4 text-center border-top">
+                <a href="{{ url_for('dashboard.admin_dashboard') }}" class="btn btn-outline-secondary px-4">
+                    <i class="fas fa-arrow-left me-2"></i>Back to Dashboard
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

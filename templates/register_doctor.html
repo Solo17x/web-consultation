@@ -1,0 +1,269 @@
+{% extends "base.html" %}
+{% block title %}Doctor Registration{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="card shadow-lg p-4">
+        <h2 class="text-center text-primary mb-4">Doctor Registration</h2>
+
+        <!-- 🔔 Flash messages -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            {% for category, message in messages %}
+              <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+            {% endfor %}
+          {% endif %}
+        {% endwith %}
+
+        <form method="POST" action="{{ url_for('auth.register_doctor') }}" enctype="multipart/form-data">
+            {{ form.hidden_tag() }}
+
+            <!-- Personal Information -->
+            <fieldset class="border p-3 rounded mb-4">
+                <legend class="w-auto text-primary fw-bold">Personal Information</legend>
+                <div class="row">
+                    <div class="col-md-6">
+                        {{ form.full_name.label }} {{ form.full_name(class="form-control") }}
+                        {% for error in form.full_name.errors %}
+                        <small class="text-danger">{{ error }}</small>
+                        {% endfor %}
+                    </div>
+                    <div class="col-md-6">
+                        {{ form.email.label }} {{ form.email(class="form-control") }}
+                        {% for error in form.email.errors %}
+                        <small class="text-danger">{{ error }}</small>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-md-6">
+                        {{ form.phone.label }} {{ form.phone(class="form-control") }}
+                        {% for error in form.phone.errors %}
+                        <small class="text-danger">{{ error }}</small>
+                        {% endfor %}
+                    </div>
+                    <div class="col-md-6">
+                        {{ form.dob.label }} {{ form.dob(class="form-control", type="text", placeholder="YYYY-MM-DD") }}
+                        {% for error in form.dob.errors %}
+                        <small class="text-danger">{{ error }}</small>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-md-6">
+                        {{ form.gender.label }} {{ form.gender(class="form-control") }}
+                        {% for error in form.gender.errors %}
+                        <small class="text-danger">{{ error }}</small>
+                        {% endfor %}
+                    </div>
+                    <div class="col-md-6">
+                        {{ form.profile_picture.label }} {{ form.profile_picture(class="form-control", accept="image/*") }}
+                        {% for error in form.profile_picture.errors %}
+                        <small class="text-danger">{{ error }}</small>
+                        {% endfor %}
+                    </div>
+                </div>
+            </fieldset>
+
+            <!-- Location -->
+            <fieldset class="border p-3 rounded mb-4">
+                <legend class="w-auto text-primary fw-bold">Location</legend>
+                <div class="row">
+                    <div class="col-md-6">
+                        {{ form.country.label }} {{ form.country(class="form-control") }}
+                        {% for error in form.country.errors %}
+                        <small class="text-danger">{{ error }}</small>
+                        {% endfor %}
+                    </div>
+                    <div class="col-md-6">
+                        {{ form.city.label }} {{ form.city(class="form-control") }}
+                        {% for error in form.city.errors %}
+                        <small class="text-danger">{{ error }}</small>
+                        {% endfor %}
+                    </div>
+                </div>
+            </fieldset>
+
+            <!-- Professional Info -->
+            <fieldset class="border p-3 rounded mb-4">
+                <legend class="w-auto text-primary fw-bold">Professional Details</legend>
+                <div class="row">
+                    <div class="col-md-6">
+                        {{ form.medical_license.label }} {{ form.medical_license(class="form-control") }}
+                        {% for error in form.medical_license.errors %}
+                        <small class="text-danger">{{ error }}</small>
+                        {% endfor %}
+                    </div>
+                    <div class="col-md-6">
+                        {{ form.specialization.label }} {{ form.specialization(class="form-control") }}
+                        {% for error in form.specialization.errors %}
+                        <small class="text-danger">{{ error }}</small>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-md-6">
+                        {{ form.experience.label }} {{ form.experience(class="form-control") }}
+                        {% for error in form.experience.errors %}
+                        <small class="text-danger">{{ error }}</small>
+                        {% endfor %}
+                    </div>
+                    <div class="col-md-6">
+                        {{ form.qualifications.label }} {{ form.qualifications(class="form-control") }}
+                        {% for error in form.qualifications.errors %}
+                        <small class="text-danger">{{ error }}</small>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-md-6">
+                        {{ form.hospital_clinic.label }} {{ form.hospital_clinic(class="form-control") }}
+                        {% for error in form.hospital_clinic.errors %}
+                        <small class="text-danger">{{ error }}</small>
+                        {% endfor %}
+                    </div>
+                    <div class="col-md-6">
+                        {{ form.availability.label }} {{ form.availability(class="form-control") }}
+                        {% for error in form.availability.errors %}
+                        <small class="text-danger">{{ error }}</small>
+                        {% endfor %}
+                    </div>
+                </div>
+            </fieldset>
+
+            <!-- Upload Official Documents -->
+            <fieldset class="border p-3 rounded mb-4">
+                <legend class="w-auto text-primary fw-bold">Upload Official Documents</legend>
+                <div class="row">
+                    <div class="col-md-6">
+                        {{ form.license_front.label }} {{ form.license_front(class="form-control") }}
+                        {% for error in form.license_front.errors %}
+                        <small class="text-danger">{{ error }}</small>
+                        {% endfor %}
+                    </div>
+                    <div class="col-md-6">
+                        {{ form.license_back.label }} {{ form.license_back(class="form-control") }}
+                        {% for error in form.license_back.errors %}
+                        <small class="text-danger">{{ error }}</small>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-md-6">
+                        {{ form.board_cert.label }} {{ form.board_cert(class="form-control") }}
+                        {% for error in form.board_cert.errors %}
+                        <small class="text-danger">{{ error }}</small>
+                        {% endfor %}
+                    </div>
+                </div>
+            </fieldset>
+
+            <!-- Additional Info -->
+            <fieldset class="border p-3 rounded mb-4">
+                <legend class="w-auto text-primary fw-bold">Additional Information</legend>
+                <div class="row">
+                    <div class="col-md-6">
+                        {{ form.short_bio.label }} {{ form.short_bio(class="form-control") }}
+                        {% for error in form.short_bio.errors %}
+                        <small class="text-danger">{{ error }}</small>
+                        {% endfor %}
+                    </div>
+                    <div class="col-md-6">
+                        {{ form.linkedin.label }} {{ form.linkedin(class="form-control") }}
+                        {% for error in form.linkedin.errors %}
+                        <small class="text-danger">{{ error }}</small>
+                        {% endfor %}
+                    </div>
+                </div>
+            </fieldset>
+
+            <!-- Security -->
+            <fieldset class="border p-3 rounded mb-4">
+                <legend class="w-auto text-primary fw-bold">Security</legend>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="password">{{ form.password.label.text }}</label>
+                        <div class="input-group">
+                            {{ form.password(class="form-control", id="password") }}
+                            <button class="btn btn-outline-secondary" type="button" onclick="togglePassword('password')">
+                                <i class="bi bi-eye-slash" id="togglePasswordIcon1"></i>
+                            </button>
+                        </div>
+                        {% for error in form.password.errors %}
+                        <small class="text-danger">{{ error }}</small>
+                        {% endfor %}
+                    </div>
+                    <div class="col-md-6">
+                        <label for="confirm_password">{{ form.confirm_password.label.text }}</label>
+                        <div class="input-group">
+                            {{ form.confirm_password(class="form-control", id="confirm_password") }}
+                            <button class="btn btn-outline-secondary" type="button" onclick="togglePassword('confirm_password')">
+                                <i class="bi bi-eye-slash" id="togglePasswordIcon2"></i>
+                            </button>
+                        </div>
+                        {% for error in form.confirm_password.errors %}
+                        <small class="text-danger">{{ error }}</small>
+                        {% endfor %}
+                    </div>
+                </div>
+            </fieldset>
+
+            <div class="text-center">
+                {{ form.submit(class="btn btn-primary btn-lg mt-3") }}
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- 👁️ JS to toggle visibility -->
+<script>
+        document.addEventListener("DOMContentLoaded", function () {
+        const passwordInput = document.getElementById("password");
+        const confirmPasswordInput = document.getElementById("confirm_password");
+        const passwordWarning = document.getElementById("password-warning");
+        const confirmPasswordWarning = document.getElementById("confirm-password-warning");
+        const submitButton = document.querySelector("button[type='submit']");
+
+        function validatePassword() {
+            const password = passwordInput.value;
+            const isValid = password.length >= 8 && /[A-Z]/.test(password) && /\d/.test(password) && /[@$!%*?&]/.test(password);
+            passwordWarning.textContent = isValid ? "" : "⚠️ Password must be at least 8 characters, contain an uppercase letter, a number, and a special character.";
+            return isValid;
+        }
+
+        function validateConfirmPassword() {
+            const isMatch = confirmPasswordInput.value === passwordInput.value;
+            confirmPasswordWarning.textContent = isMatch ? "" : "⚠️ Passwords do not match.";
+            return isMatch;
+        }
+
+        function validateForm(event) {
+            if (!validatePassword() || !validateConfirmPassword()) {
+                event.preventDefault();
+                submitButton.disabled = true;
+            } else {
+                submitButton.disabled = false;
+            }
+        }
+
+        passwordInput.addEventListener("input", validateForm);
+        confirmPasswordInput.addEventListener("input", validateForm);
+    });
+    function togglePassword(fieldId) {
+        const input = document.getElementById(fieldId);
+        const icon = document.getElementById(`togglePasswordIcon${fieldId === "password" ? 1 : 2}`);
+        if (input.type === "password") {
+            input.type = "text";
+            icon.classList.remove("bi-eye-slash");
+            icon.classList.add("bi-eye");
+        } else {
+            input.type = "password";
+            icon.classList.remove("bi-eye");
+            icon.classList.add("bi-eye-slash");
+        }
+    }
+</script>
+{% endblock %}
